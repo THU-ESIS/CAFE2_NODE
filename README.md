@@ -27,7 +27,7 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 ```
 ######8.	Maven. （http://maven.apache.org/download.cgi ）
 
-Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file `/config/src/main/resources/baseResources/config.properties` and set the values of four parameters. The default setting is as follows:    
+######Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file `/config/src/main/resources/baseResources/config.properties` and set the values of four parameters. The default setting is as follows:    
 ```Bash 
 1.	TempFolder=/mnt/CMIP5/cmip5_tmp/               #The folder stores temp files
 2.	ncl_path=/usr/local/ncl/bin/ncl                #The installation path of NCL
@@ -36,4 +36,24 @@ Before your installation, you could set the parameters in the configuration file
 ```
 ##Installation procedures
 ######1.	Database preparation. 
-You have to create a user name of your database, generate a database ip address (jdbc.host) database port (jdbc.port) database user name (jdbc.user) and database password (jdbc.password) 
+You have to create a user name of your database, generate a database ip address (`jdbc.host`) database port (`jdbc.port`) database user name (`jdbc.user`) and database password (`jdbc.password`) 
+######2.	Creating a database. 
+Grand privileges to the database user (`jdbc.user`) created in `step 1` and generate database name (`jdbc.database`)
+######3.  Creating database tables. 
+The path of initiation script is: `/db-init/src/main/resources/init.sql`
+You have to enter mySQL, use the database in `step2` and run this script.
+######4.  Packaging.
+You could use following command to generate a `.war` package:
+```Bash 
+mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${jdbc.port} -Djdbc.database=${jdbc.database} -Djdbc.user=${ jdbc.user} -Djdbc.password=${jdbc.password}
+```
+you have to replace ${} to the parameters in `step1` and `step2`, for example:
+```Bash 
+mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=model_data -Djdbc.user=abc -Djdbc.password=123456
+```
+######5.  Deploying the war package under the Tomcat.
+You could name the `.war` package and place it under `tomcat/webapps`. Then you have to start Tomcat service. The name of the war package will determine the access path of the web application. For example, if the name of the war package is `datamanager-worker.war`, then after deployment, the access address will be `[host]:[port]/datamanager-worker`
+######6.  Choosing deployment mode.
+You could access this web page（`http://{host}:{port}/datamanager-web/web/deployment`） to choose deployment mode. Generally, in a complete infrastructure, there are one central node and several worker nodes, all the worker nodes are peer-to-peer.
+######7.  Data indexing.      
+For worker wodes, you could access the web page `http://{host}: {port}/datamanager-web/web/parser`, enter the root folder of the data archive and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
