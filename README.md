@@ -34,6 +34,9 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 3.	ncl_env=NCARG_ROOT=/usr/local/ncl              #The environment variable of NCL
 4.	ScriptFolder=/usr/local/nclscripts/            #The folder stores analytic scripts
 ```
+#####PAY ATTENTION: Since this version only support `CF-compliant netCDF files`, you may have to reorganize the file names and directories of your data to the specific structure. You may have to refer to this site to reorganize your data archive: `http://cmip-pcmdi.llnl.gov/cmip5/output_req.html ` A software has been provided for reorganization in this web page.
+#####When all the preparations are done, you could begin to set up this package.
+
 ##Installation procedures
 ######1.	Database preparation. 
 You have to create a user name of your database, generate a database ip address (`jdbc.host`) database port (`jdbc.port`) database user name (`jdbc.user`) and database password (`jdbc.password`) 
