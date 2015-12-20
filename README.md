@@ -27,7 +27,7 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 ```
 ######8.	Maven. （http://maven.apache.org/download.cgi ）
 
-#####Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file /config/src/main/resources/baseResources/config.properties and set the values of four parameters. The default setting is as follows:    
+Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file `/config/src/main/resources/baseResources/config.properties` and set the values of four parameters. The default setting is as follows:    
 ```Bash 
 1.	TempFolder=/mnt/CMIP5/cmip5_tmp/               #The folder stores temp files
 2.	ncl_path=/usr/local/ncl/bin/ncl                #The installation path of NCL
