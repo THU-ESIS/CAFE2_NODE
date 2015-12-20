@@ -1,6 +1,6 @@
 #CAFE_NODE
-To see detailed information about this package, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki)  .
-## Before your Installation
+To see detailed information about this package, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki).
+##Before your Installation
 `Notice`: This package should be installed on the server-side. Data archives need to be read from this server. As the function of this package is limited by some other external applications, a Linux environment is required. To ensure the node work correctly, following applications have to be installed before your installation:       
 ######1.	MySQL Server and Client (http://www.mysql.com/downloads/ )     
 ```Bash 
@@ -27,3 +27,13 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 ```
 ######8.	Maven. （http://maven.apache.org/download.cgi ）
 
+#####Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file /config/src/main/resources/baseResources/config.properties and set the values of four parameters. The default setting is as follows:    
+```Bash 
+1.	TempFolder=/mnt/CMIP5/cmip5_tmp/               #The folder stores temp files
+2.	ncl_path=/usr/local/ncl/bin/ncl                #The installation path of NCL
+3.	ncl_env=NCARG_ROOT=/usr/local/ncl              #The environment variable of NCL
+4.	ScriptFolder=/usr/local/nclscripts/            #The folder stores analytic scripts
+```
+##Installation procedures
+######1.	Database preparation. 
+You have to create a user name of your database, generate a database ip address (jdbc.host) database port (jdbc.port) database user name (jdbc.user) and database password (jdbc.password) 
