@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.task.dao.TaskExecutionDao">
+
+	<update id="updateProgress">
+		update sub_task set
+			progress=#{progress},
+			progress_description=#{description}
+		where id=#{id}
+	</update>
+	
+	<update id="setStatus">
+		update sub_task set
+			status=#{status},
+			progress_description=#{description}
+		where id=#{id}
+	</update>
+
+    <update id="setFailed">
+        update sub_task set
+            status='failed',
+            failure_cause=#{failureCause}
+        where id=#{id}
+    </update>
+	
+	<insert id="addResultFile">
+		insert into sub_task_result (
+			sub_task_id,
+			type,
+			path
+		) values (
+			#{id},
+			#{type},
+			#{path}
+		)
+	</insert>
+
+</mapper>

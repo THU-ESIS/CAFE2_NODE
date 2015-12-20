@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.workernode.dao.WorkerNodeDao">
+
+    <insert id="insert" parameterType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO worker_node
+            (name, ip, port, root_path)
+        VALUES
+            (#{name}, #{ip}, #{port}, #{rootPath})
+    </insert>
+
+    <select id="query" parameterType="int" resultType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
+        SELECT
+            id AS id,
+            name AS name,
+            ip AS ip,
+            port AS port,
+            root_path AS rootPath
+        FROM worker_node
+        WHERE id=#{id}
+    </select>
+
+    <delete id="remove" parameterType="int">
+        DELETE FROM worker_node
+        WHERE id=#{id}
+    </delete>
+    
+    <select id="listAll" resultType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
+        SELECT
+            id AS id,
+            name AS name,
+            ip AS ip,
+            port AS port,
+            root_path AS rootPath
+        FROM worker_node
+    </select>
+
+</mapper>

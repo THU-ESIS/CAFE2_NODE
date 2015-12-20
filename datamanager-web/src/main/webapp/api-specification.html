@@ -1,0 +1,725 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type="text/css">body {
+  font-family: "Microsoft YaHei",Simsun, Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: white;
+  padding: 12px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 8px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 8px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 8px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; 
+      font-size: 14px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; 
+      font-size: 14px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+
+  margin: 0 2px;
+  padding: 0 5px;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; 
+  white-space: normal;
+
+}
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  word-wrap:break-word;
+  max-width:100%;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; 
+}
+pre code, pre tt {
+  background-color: transparent;
+  border: none; 
+}
+
+@media screen {
+	pre {
+		word-wrap: break-word;
+	}
+}
+@media print {
+  table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+
+*/
+
+.hljs {
+  display: block; padding: 0.5em;
+  background: #F0F0F0;
+}
+
+.hljs,
+.hljs-subst,
+.hljs-tag .hljs-title,
+.lisp .hljs-title,
+.clojure .hljs-built_in,
+.nginx .hljs-title {
+  color: black;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-constant,
+.hljs-parent,
+.hljs-tag .hljs-value,
+.hljs-rules .hljs-value,
+.hljs-rules .hljs-value .hljs-number,
+.hljs-preprocessor,
+.hljs-pragma,
+.haml .hljs-symbol,
+.ruby .hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-aggregate,
+.hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.hljs-addition,
+.hljs-flow,
+.hljs-stream,
+.bash .hljs-variable,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.tex .hljs-special,
+.erlang_repl .hljs-function_or_atom,
+.asciidoc .hljs-header,
+.markdown .hljs-header,
+.coffeescript .hljs-attribute {
+  color: #800;
+}
+
+.smartquote,
+.hljs-comment,
+.hljs-annotation,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-chunk,
+.asciidoc .hljs-blockquote,
+.markdown .hljs-blockquote {
+  color: #888;
+}
+
+.hljs-number,
+.hljs-date,
+.hljs-regexp,
+.hljs-literal,
+.hljs-hexcolor,
+.smalltalk .hljs-symbol,
+.smalltalk .hljs-char,
+.go .hljs-constant,
+.hljs-change,
+.lasso .hljs-variable,
+.makefile .hljs-variable,
+.asciidoc .hljs-bullet,
+.markdown .hljs-bullet,
+.asciidoc .hljs-link_url,
+.markdown .hljs-link_url {
+  color: #080;
+}
+
+.hljs-label,
+.hljs-javadoc,
+.ruby .hljs-string,
+.hljs-decorator,
+.hljs-filter .hljs-argument,
+.hljs-localvars,
+.hljs-array,
+.hljs-attr_selector,
+.hljs-important,
+.hljs-pseudo,
+.hljs-pi,
+.haml .hljs-bullet,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-envvar,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in,
+.tex .hljs-formula,
+.erlang_repl .hljs-reserved,
+.hljs-prompt,
+.asciidoc .hljs-link_label,
+.markdown .hljs-link_label,
+.vhdl .hljs-attribute,
+.clojure .hljs-attribute,
+.asciidoc .hljs-attribute,
+.lasso .hljs-attribute,
+.coffeescript .hljs-property,
+.hljs-phony {
+  color: #88F
+}
+
+.hljs-keyword,
+.hljs-id,
+.hljs-title,
+.hljs-built_in,
+.hljs-aggregate,
+.css .hljs-tag,
+.hljs-javadoctag,
+.hljs-phpdoc,
+.hljs-yardoctag,
+.smalltalk .hljs-class,
+.hljs-winutils,
+.bash .hljs-variable,
+.apache .hljs-tag,
+.go .hljs-typename,
+.tex .hljs-command,
+.asciidoc .hljs-strong,
+.markdown .hljs-strong,
+.hljs-request,
+.hljs-status {
+  font-weight: bold;
+}
+
+.asciidoc .hljs-emphasis,
+.markdown .hljs-emphasis {
+  font-style: italic;
+}
+
+.nginx .hljs-built_in {
+  font-weight: normal;
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.lasso .markup,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.5;
+}
+
+pre, code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.pln {
+  color: #48484C; }
+
+.str {
+  color: #DD1144; }
+
+.kwd {
+  color: #1E347B; }
+
+.com {
+  color: #93A1A1; }
+
+.typ {
+  color: teal; }
+
+.lit {
+  color: #195F91; }
+
+.pun {
+  color: #93A1A1; }
+
+.opn {
+  color: #93A1A1; }
+
+.clo {
+  color: #93A1A1; }
+
+.tag {
+  color: #008; }
+
+.atn {
+  color: teal; }
+
+.atv {
+  color: #DD1144; }
+
+.dec {
+  color: teal; }
+
+.var {
+  color: teal; }
+
+.fun {
+  color: #DC322F; }
+
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint {
+  background-color: #F7F7F9;
+  padding: 10px;
+  border: 1px solid #E1E1E8; 
+}
+
+pre.prettyprint.linenums {
+  box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset; 
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+pre.prettyprint.linenums ol.linenums {
+  color: #1E347B;
+  padding-left: 30px !important;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+pre.prettyprint.linenums ol.linenums li {
+  color: #BEBEC5;
+  line-height: 18px;
+  padding-left: 12px !important; 
+}
+
+pre.prettyprint.linenums ol.linenums li.L0,
+pre.prettyprint.linenums ol.linenums li.L1,
+pre.prettyprint.linenums ol.linenums li.L2,
+pre.prettyprint.linenums ol.linenums li.L3,
+pre.prettyprint.linenums ol.linenums li.L4,
+pre.prettyprint.linenums ol.linenums li.L5,
+pre.prettyprint.linenums ol.linenums li.L6,
+pre.prettyprint.linenums ol.linenums li.L7,
+pre.prettyprint.linenums ol.linenums li.L8,
+pre.prettyprint.linenums ol.linenums li.L9 {
+  list-style-type: decimal !important; 
+}
+</style><meta http-equiv="X-UA-Compatible" content="IE=8">
+
+<title>api-specification.md</title>
+
+<style type="text/css" id="wiz_custom_css">
+body
+{
+    font-family: 微软雅黑;
+    font-size: 10.5pt;
+    line-height: 1.5;
+}
+html, body
+{
+    color: ;
+    background-color: ;
+}
+h1 {
+    font-size:1.5em;
+    font-weight:bold;
+}
+h2 {
+    font-size:1.4em;
+    font-weight:bold;
+}
+h3 {
+    font-size:1.3em;
+    font-weight:bold;
+}
+h4 {
+    font-size:1.2em;
+    font-weight:bold;
+}
+h5 {
+    font-size:1.1em;
+    font-weight:bold;
+}
+h6 {
+    font-size:1.0em;
+    font-weight:bold;
+}
+img {
+    border:0;
+    max-width: 100%;
+}
+blockquote {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+table {
+    border-collapse:collapse;
+    border:1px solid #bbbbbb;
+}
+td {
+    border-collapse:collapse;
+    border:1px solid #bbbbbb;
+}
+</style>
+</head>
+<body wiz_markdown_inited="true" style=""><h2 id="changelog">changelog</h2>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>日期</th>
+<th>修改人</th>
+<th>修改内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v5</td>
+<td>2014-10-14</td>
+<td>yanke</td>
+<td>修改了提交任务接口的返回值</td>
+</tr>
+<tr>
+<td>v4</td>
+<td>2014-09-28</td>
+<td>yanke</td>
+<td>修改了提交任务的接口</td>
+</tr>
+<tr>
+<td>v3</td>
+<td>2014-09-12</td>
+<td>yanke</td>
+<td>1. 获取查询条件初始侯选值接口的返回值取消了temporalRange<br>2. 按条件筛选的参数取消了temporalStart和temporalEnd、返回值的filter实体中取消了temporalRange<br>3. 新增了<em>提交任务</em>和<em>查询任务</em>两个接口</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>2014-08-22</td>
+<td>yanke</td>
+<td><strong>按条件分页查询</strong>接口改名为<strong>按条件筛选</strong><br>且明确了其返回值中model相关的字段</td>
+</tr>
+<tr>
+<td>v1</td>
+<td>2014-07-30</td>
+<td>yanke</td>
+<td>新增了<strong>获取查询条件侯选值</strong>和<strong>按条件分页查询</strong>两个接口</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">获取查询条件初始侯选值</h3>
+<h5 id="-">路径</h5>
+<p><code>GET /api/v1/modelfile/query/filter</code></p>
+<h5 id="-">返回值 - 成功</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"data"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">        </span><span class="str">"institue"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"LASG-CESS"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">        </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"FGOALS-g2"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">        </span><span class="str">"experiment"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"historicalMisc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">            </span><span class="str">"decadal1965"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">        </span><span class="str">"frequency"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"day"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"mon"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">        </span><span class="str">"modelingRealm"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">            </span><span class="str">"ocean"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"atmos"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">             </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">        </span><span class="str">"ensembleMember"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"r1i1p1"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">            </span><span class="str">"r2i1p1"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">        </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">        </span><span class="str">"variableName"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"tossq"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">            </span><span class="str">"omldamax"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">        </span><span class="pun">]</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">    </span><span class="pun">}</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">}</span></code></li></ol></pre><h5 id="-">返回值 - 失败</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"errorMsg"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"exception thrown while proceeding the request"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pun">}</span></code></li></ol></pre><h3 id="-">按条件筛选</h3>
+<h5 id="-">路径</h5>
+<p><code>GET /api/v1/modelfile/query</code></p>
+<h5 id="-">参数</h5>
+<h6 id="page">page</h6>
+<ul>
+<li>作用：指定当前筛选结果的页码</li>
+<li>格式：<code>page=0</code></li>
+<li>字段说明：必选；起始值为0</li>
+</ul>
+<h6 id="pagesize">pageSize</h6>
+<ul>
+<li>作用：指定当前筛选结果的每一页的行数</li>
+<li>格式：<code>pageSize=20</code></li>
+<li>字段说明：必选</li>
+</ul>
+<h6 id="institute">institute</h6>
+<ul>
+<li>作用：指定一组institute作为过滤条件</li>
+<li>格式：<code>institute=a&amp;institute=b</code></li>
+<li>字段说明：可选、可多选</li>
+</ul>
+<h6 id="model">model</h6>
+<ul>
+<li>作用：指定一组model作为过滤条件</li>
+<li>格式：<code>model=a&amp;model=b</code></li>
+<li>字段说明：可选、可多选</li>
+</ul>
+<h6 id="experiment">experiment</h6>
+<ul>
+<li>作用：指定一个experiment作为过滤条件</li>
+<li>格式：<code>experiment=a</code></li>
+<li>字段说明：可选、<strong>不可</strong>多选</li>
+</ul>
+<h6 id="frequency">frequency</h6>
+<ul>
+<li>作用：指定一个frequency作为过滤条件</li>
+<li>格式：<code>frequency=a</code></li>
+<li>字段说明：可选、<strong>不可</strong>多选</li>
+</ul>
+<h6 id="modelingrealm">modelingRealm</h6>
+<ul>
+<li>作用：指定一个modelingRealm作为过滤条件</li>
+<li>格式：<code>modelingRealm=a</code></li>
+<li>字段说明：可选、<strong>不可</strong>多选</li>
+</ul>
+<h6 id="ensemblemember">ensembleMember</h6>
+<ul>
+<li>作用：指定一组ensembleMember作为过滤条件</li>
+<li>格式：<code>ensembleMember=a&amp;ensembleMember=b</code></li>
+<li>字段说明：可选、可多选</li>
+</ul>
+<h6 id="variablename">variableName</h6>
+<ul>
+<li>作用：指定一组variableName作为过滤条件</li>
+<li>格式：<code>variableName=a</code></li>
+<li>字段说明：可选、<strong>不可</strong>多选</li>
+</ul>
+<h5 id="-">返回值 - 成功</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"data"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">        </span><span class="str">"filter"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">         </span><span class="pun">//</span><span class="pln"> </span><span class="pun">筛选过后剩余的查询条件侯选值</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"institue"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                </span><span class="str">"LASG-CESS"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                </span><span class="str">"FGOALS-g2"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"experiment"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">                </span><span class="str">"historicalMisc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">                </span><span class="str">"decadal1965"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"frequency"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">                </span><span class="str">"day"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                </span><span class="str">"mon"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"modelingRealm"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">                </span><span class="str">"ocean"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">                </span><span class="str">"atmos"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                 </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"ensembleMember"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">                </span><span class="str">"r1i1p1"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                </span><span class="str">"r2i1p1"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">            </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"variableName"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">                </span><span class="str">"tossq"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">                </span><span class="str">"omldamax"</span><span class="pln"> </span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="pun">]</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">        </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">        </span><span class="str">"modelList"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><span class="pln">      </span><span class="pun">//</span><span class="pln"> </span><span class="pun">模式列表</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">            </span><span class="str">"page"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">           </span><span class="pun">//</span><span class="pln"> </span><span class="pun">当前页码</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">            </span><span class="str">"pageSize"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">20</span><span class="pun">,</span><span class="pln">      </span><span class="pun">//</span><span class="pln"> </span><span class="pun">每页行数</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">            </span><span class="str">"rowCount"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">,</span><span class="pln">      </span><span class="pun">//</span><span class="pln"> </span><span class="pun">总计行数</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"list"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">                </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">                    </span><span class="str">"institute"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                    </span><span class="str">"model"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">                    </span><span class="str">"experiment"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">                    </span><span class="str">"frequency"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">                    </span><span class="str">"modelingRealm"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                    </span><span class="str">"ensembleMember"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                    </span><span class="str">"variableName"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"abc"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">                    </span><span class="str">"temporalStart"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"201401"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">                    </span><span class="str">"temporalEnd"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"201912"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">                </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">                </span><span class="pun">...,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="pun">]</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">        </span><span class="pun">}</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">    </span><span class="pun">}</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pun">}</span></code></li></ol></pre><h5 id="-">返回值 - 失败</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"errorMsg"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"exception thrown while proceeding the request"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pun">}</span></code></li></ol></pre><h3 id="-">提交任务</h3>
+<h5 id="-">路径</h5>
+<p><code>POST /api/v1/task/submit</code></p>
+<h5 id="-">参数</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"models"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">        </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">            </span><span class="str">"institue"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"LASG-CESS"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"FGOALS-g2"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">            </span><span class="str">"experiment"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"decadal1965"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="str">"frequency"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"mon"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"modelingRealm"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"atmos"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"ensembleMember"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"r2i1p1"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">            </span><span class="str">"variableName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"omldamax"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">        </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">        </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="str">"institue"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"LASG-CESS"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">            </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"FGOALS-g2"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"experiment"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"decadal1965"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">            </span><span class="str">"frequency"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"mon"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="str">"modelingRealm"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"atmos"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"ensembleMember"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"r3i1p1"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">            </span><span class="str">"variableName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"omldamax"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">        </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">        </span><span class="pun">...</span><span class="pln"> </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="pun">],</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">    </span><span class="str">"nclScript"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">        </span><span class="str">"name"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"nameValue"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">        </span><span class="str">"temporalStart"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"185000"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">        </span><span class="str">"temporalEnd"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"200000"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">        </span><span class="str">"latMin"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"0"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">        </span><span class="str">"latMax"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"90"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">        </span><span class="str">"lonMin"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"0"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">        </span><span class="str">"lonMax"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"90"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="pun">}</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pun">}</span></code></li></ol></pre><h5 id="-">返回值 - 成功</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"data"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> uuid</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pun">}</span></code></li></ol></pre><h5 id="-">返回值 - 失败</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"errorMsg"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"exception thrown while proceeding the request"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pun">}</span></code></li></ol></pre><h3 id="-">查询任务</h3>
+<h5 id="-">路径</h5>
+<p><code>GET /api/v1/task/query</code></p>
+<h5 id="-">参数</h5>
+<h6 id="id">id</h6>
+<ul>
+<li>作用：指定一个taskId</li>
+<li>格式：<code>id=1</code></li>
+<li>字段说明：必填</li>
+</ul>
+<h5 id="-">返回值 - 成功</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"data"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">        </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"model"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">                </span><span class="str">"institue"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"LASG-CESS"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">                </span><span class="str">"model"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"FGOALS-g2"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">                </span><span class="str">"experiment"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"decadal1965"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">                </span><span class="str">"frequency"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"mon"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                </span><span class="str">"modelingRealm"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"atmos"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                </span><span class="str">"ensembleMember"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"r3i1p1"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">                </span><span class="str">"variableName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"omldamax"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">            </span><span class="str">"status"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"finished/running/failed"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">            </span><span class="str">"failureCause"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"exception thrown"</span><span class="pun">,</span><span class="pln">  </span><span class="pun">//</span><span class="pln"> </span><span class="pun">只有</span><span class="pln">failed</span><span class="pun">情况才有此字段</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">            </span><span class="str">"progress"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">85</span><span class="pun">,</span><span class="pln">    </span><span class="pun">//</span><span class="pln"> </span><span class="pun">百分比</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code><span class="pln">            </span><span class="str">"progressDescription"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"merged separated nc files"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code><span class="pln">            </span><span class="str">"resultFile"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code><span class="pln">                </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code><span class="pln">                    </span><span class="str">"type"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"nc/fig/txt"</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pln">                    </span><span class="str">"url"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"http://worker.node:port/path/result.nc"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">                </span><span class="pun">}</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">            </span><span class="pun">]</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pln">        </span><span class="pun">},</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code><span class="pln">        </span><span class="pun">...</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code><span class="pln">    </span><span class="pun">]</span></code></li></ol></pre><h5 id="-">返回值 - 失败</h5>
+<pre class="prettyprint linenums language-json prettyprinted" style=""><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code><span class="pln">    </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code><span class="pln">    </span><span class="str">"errorMsg"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"exception thrown while proceeding the request"</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code><span class="pun">}</span></code></li></ol></pre>
+
+</body></html>

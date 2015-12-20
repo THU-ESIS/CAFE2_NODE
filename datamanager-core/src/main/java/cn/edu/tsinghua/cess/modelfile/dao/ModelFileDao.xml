@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao">
+
+    <select id="queryRelatedNodes" resultType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
+        select
+            wn.id as id,
+            wn.name as name,
+            wn.ip as ip,
+            wn.port as port,
+            wn.root_path as rootPath
+        from (
+            select
+                distinct node_id
+            from model_file
+            where
+                1=1
+            <if test="modelList != null and modelList.size > 0">
+                and
+                <foreach collection="modelList" item="model" open="(" separator=" or " close=")">
+                    (
+                        model_file.institute=#{model.institute}
+                        and model_file.model=#{model.model}
+                        and model_file.experiment=#{model.experiment}
+                        and model_file.frequency=#{model.frequency}
+                        and model_file.modeling_realm=#{model.modelingRealm}
+                        and model_file.ensemble_member=#{model.ensembleMember}
+                        and model_file.variable_name=#{model.variableName}
+                    )
+                </foreach>
+            </if>
+            <include refid="ensureTemporal" />
+        ) t
+        join worker_node wn on t.node_id=wn.id
+    </select>
+
+	<select id="queryModel" resultType="cn.edu.tsinghua.cess.modelfile.entity.Model">
+		select distinct
+			wn.id as nodeId,
+			wn.name as nodeName,
+			institute,
+			model,
+			experiment,
+			frequency,
+			modeling_realm	as modelingRealm,
+			ensemble_member	as ensembleMember,
+			variable_name	as variableName,
+			<include refid="emr" />,
+			<include refid="emi" />,
+			<include refid="emp" />
+		from model_file
+        left join worker_node wn on model_file.node_id=wn.id
+		where
+			1=1
+			<include refid="ensureTemporal"/>
+			<include refid="filterFields" />
+		order by nodeName, institute, model, experiment, frequency, modeling_realm, emr, emi, emp, variable_name
+	</select>
+
+    <select id="queryModelOfNode" resultType="cn.edu.tsinghua.cess.modelfile.entity.Model">
+        select distinct
+            node_id as nodeId,
+            institute,
+            model,
+            experiment,
+            frequency,
+            modeling_realm	as modelingRealm,
+            ensemble_member	as ensembleMember,
+            variable_name	as variableName
+        from model_file
+        where
+            node_id=#{nodeId}
+            and
+            <include refid="modelList" />
+            <include refid="ensureTemporal" />
+    </select>
+
+    <select id="queryModelOfLocal" resultType="cn.edu.tsinghua.cess.modelfile.entity.Model">
+        select distinct
+        node_id as nodeId,
+        institute,
+        model,
+        experiment,
+        frequency,
+        modeling_realm	as modelingRealm,
+        ensemble_member	as ensembleMember,
+        variable_name	as variableName
+        from model_file
+        where
+
+        <include refid="modelList" />
+        <include refid="ensureTemporal" />
+    </select>
+
+    <sql id="modelList">
+        <foreach collection="modelList" item="model" open="(" separator=" or " close=")">
+            (
+            model_file.institute=#{model.institute}
+            and model_file.model=#{model.model}
+            and model_file.experiment=#{model.experiment}
+            and model_file.frequency=#{model.frequency}
+            and model_file.modeling_realm=#{model.modelingRealm}
+            and model_file.ensemble_member=#{model.ensembleMember}
+            and model_file.variable_name=#{model.variableName}
+            )
+        </foreach>
+    </sql>
+
+
+	<insert id="insertModelFileList" parameterType="list"
+		useGeneratedKeys="true">
+		insert into model_file (
+			node_id,
+			full_path,
+			institute,
+			model,
+			experiment,
+			frequency,
+			modeling_realm,
+			ensemble_member,
+			variable_name,
+			mip_table,
+			temporal_start_year,
+			temporal_start_month,
+			temporal_start_day,
+			temporal_start_hour,
+			temporal_start_minute,
+			temporal_end_year,
+			temporal_end_month,
+			temporal_end_day,
+			temporal_end_hour,
+			temporal_end_minute,
+			geographical_info
+		)
+		values
+		<foreach collection="list" item="item" separator=", ">
+			(
+				#{item.nodeId},
+				#{item.fullPath},
+				#{item.institute},
+				#{item.model},
+				#{item.experiment},
+				#{item.frequency},
+				#{item.modelingRealm},
+				#{item.ensembleMember},
+				#{item.variableName},
+				#{item.mipTable},
+				#{item.temporalStartYear},
+				#{item.temporalStartMonth},
+				#{item.temporalStartDay},
+				#{item.temporalStartHour},
+				#{item.temporalStartMinute},
+				#{item.temporalEndYear},
+				#{item.temporalEndMonth},
+				#{item.temporalEndDay},
+				#{item.temporalEndHour},
+				#{item.temporalEndMinute},
+				#{item.geographicalInfo}
+			)
+		</foreach>
+	</insert>
+
+	<select id="listFieldCandidate" resultType="string">
+		<choose>
+			<when test="field == 'ensemble_member'">
+				select
+					t.${field}
+				from (
+					select distinct
+						${field},
+						<include refid="emr" />,
+						<include refid="emi" />,
+						<include refid="emp" />
+					from model_file
+					where
+					1=1
+						<include refid="ensureTemporal"/>
+						<include refid="filterFields" />
+					order by 
+						emr asc,
+						emi asc,
+						emp asc
+				) t
+			</when>
+			<otherwise>
+				select distinct
+					${field} 
+				from model_file
+				where
+					1=1
+					<include refid="ensureTemporal"/>
+					<include refid="filterFields" />
+				order by ${field} asc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="listTemporalRangeByFilter" resultType="string">
+		select distinct
+		<include refid="temporalField" />
+		from model_file
+		where
+			1=1
+			<include refid="ensureTemporal"/>
+			<include refid="filterFields"/>
+		order by
+		<include refid="temporalField" />
+		<choose>
+			<when test="isUpper">desc</when>
+			<otherwise>asc</otherwise>
+		</choose>
+		limit 0, 1
+	</select>
+	
+	<select id="listTemporalRangeByModel" resultType="string">
+		select distinct
+		<include refid="temporalField" />
+		from model_file where
+			1=1
+			<include refid="ensureTemporal"/>
+			and institute = #{model.institute}
+			and model = #{model.model}
+			and experiment = #{model.experiment}
+			and frequency = #{model.frequency}
+			and modeling_realm = #{model.modelingRealm}
+			and ensemble_member = #{model.ensembleMember}
+			and variable_name = #{model.variableName}
+		order by
+		<include refid="temporalField" />
+		<choose>
+			<when test="isUpper">desc</when>
+			<otherwise>asc</otherwise>
+		</choose>
+		limit 0, 1
+	</select>
+
+	<sql id="filterTemporalRange">
+		<if test="filter.temporalRange != null">
+			<if test="filter.temporalRange.start != null">
+				and concat(temporal_end_year, temporal_end_month)<![CDATA[>=]]>#{filter.temporalRange.start}
+			</if>
+			<if test="filter.temporalRange.end != null">
+				and concat(temporal_start_year, temporal_start_month)<![CDATA[<=]]>#{filter.temporalRange.end}
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 目前先过滤掉year、month为空的数据行 -->
+	<sql id="ensureTemporal">
+		and temporal_start_year is not null
+		and temporal_start_month is not null
+		and temporal_end_year is not null
+		and temporal_end_month is not null
+	</sql>
+
+	<sql id="filterFields">
+		<if test="filter != null">
+			<if test="filter.frequency != null and filter.frequency.size() > 0">
+				and frequency in
+				<foreach collection="filter.frequency" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="filter.institute != null and filter.institute.size() > 0">
+				and institute in
+				<foreach collection="filter.institute" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="filter.model != null and filter.model.size() > 0">
+				and model in
+				<foreach collection="filter.model" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="filter.experiment != null and filter.experiment.size() > 0">
+				and experiment in
+				<foreach collection="filter.experiment" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if
+				test="filter.modelingRealm != null and filter.modelingRealm.size() > 0">
+				and modeling_realm in
+				<foreach collection="filter.modelingRealm" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if
+				test="filter.ensembleMember != null and filter.ensembleMember.size() > 0">
+				and ensemble_member in
+				<foreach collection="filter.ensembleMember" item="item"
+					open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="filter.variableName != null and filter.variableName.size() > 0">
+				and variable_name in
+				<foreach collection="filter.variableName" item="item" open="("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<include refid="filterTemporalRange"/>
+		</if>
+	</sql>
+
+	<sql id="temporalField">
+		<choose>
+			<when test="isUpper">concat(temporal_end_year, temporal_end_month)</when>
+			<otherwise>concat(temporal_start_year, temporal_start_month)</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="queryModelFileOfModel" resultType="string">
+		select 
+			full_path
+		from model_file
+		where
+            model_file.institute=#{model.institute}
+            and model_file.model=#{model.model}
+            and model_file.experiment=#{model.experiment}
+            and model_file.frequency=#{model.frequency}
+            and model_file.modeling_realm=#{model.modelingRealm}
+            and model_file.ensemble_member=#{model.ensembleMember}
+            and model_file.variable_name=#{model.variableName}
+			<include refid="ensureTemporal"/>
+	</select>
+	
+	
+	<!-- sorting rule for column ensemble_member:
+		the content of column ensemble_member consists of three parts:
+		letter 'r' followed by a digit number 'emr',
+		letter 'i' followed by a digit number 'emi',
+		letter 'p' followed by a digit number 'emp' 
+		
+		while executing a query with ensemble_member,
+		the result set should be ordered by emr asc, emi asc, emp asc
+	 -->
+	<sql id="emr">
+		cast(substring(ensemble_member, locate('r', ensemble_member)+1, locate('i', ensemble_member)-locate('r', ensemble_member)-1) as signed) as emr
+	</sql>
+	<sql id="emi">
+		cast(substring(ensemble_member, locate('i', ensemble_member)+1, locate('p', ensemble_member)-locate('r', ensemble_member)-1) as signed) as emi
+	</sql>
+	<sql id="emp">
+		cast(substring(ensemble_member, locate('p', ensemble_member)+1) as signed) as emp
+	</sql>
+
+</mapper>

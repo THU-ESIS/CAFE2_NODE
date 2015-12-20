@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.deployment.dao.DeploymentDao">
+	<insert id="insert" parameterType="cn.edu.tsinghua.cess.deployment.entity.Deployment">
+		insert into deployment
+		(
+			mode,
+			node_id,
+			node_name,
+			node_ip,
+			node_port,
+			root_path,
+			central_node_ip,
+			central_node_port,
+			central_node_root_path
+		) values (
+			#{mode},
+			#{nodeId},
+			#{nodeName},
+			#{nodeIp},
+			#{nodePort},
+			#{rootPath},
+			#{centralNodeIp},
+			#{centralNodePort},
+			#{centralNodeRootPath}
+		)
+	</insert>
+	
+	<select id="query" resultType="cn.edu.tsinghua.cess.deployment.entity.Deployment">
+		select
+			mode,
+			node_id 	as nodeId,
+			node_name 	as nodeName,
+			node_ip 	as nodeIp,
+			node_port 	as nodePort,
+			root_path 	as rootPath,
+			central_node_ip 	as centralNodeIp,
+			central_node_port 	as centralNodePort,
+			central_node_root_path as centralNodeRootPath
+		from deployment
+	</select>
+	
+</mapper>

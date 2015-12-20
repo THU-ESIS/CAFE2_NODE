@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.task.dao.TaskSubmitionDao">
+
+	<insert id="insert" parameterType="cn.edu.tsinghua.cess.task.entity.Task"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into task (
+		    uuid,
+			submition,
+		    create_time
+		) values (
+			#{uuid},
+			#{submition},
+			#{createTime}
+		)
+	</insert>
+	
+	<insert id="insertSubTask" parameterType="cn.edu.tsinghua.cess.task.entity.SubTask"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into sub_task (
+		    model,
+		    script,
+			status,
+			progress,
+			progress_description
+		) values (
+		    #{model},
+		    #{script},
+			#{status},
+			#{progress},
+			#{progressDescription}
+		)
+	</insert>
+	
+	<insert id="insertSubTaskListEntry" parameterType="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
+		insert into task_subtask_list (
+			task_id,
+			sub_task_id,
+			node_id
+		) values (
+			#{taskId},
+			#{subTaskId},
+			#{nodeId}
+		)
+	</insert>
+	
+	<select id="listRunningSubTask" resultMap="subTask">
+		select
+			*
+		from sub_task
+		where status='running'
+	</select>
+	
+	<select id="querySubTask" resultMap="subTask">
+		select
+			*
+		from sub_task
+		where id=#{id}
+	</select>
+	
+	<resultMap type="cn.edu.tsinghua.cess.task.entity.SubTask" id="subTask">
+		<id property="id" column="id" />
+        <result property="model" column="model" />
+        <result property="script" column="script" />
+		<result property="status" column="status" />
+		<result property="progress" column="progress" />
+		<result property="progressDescription" column="progress_description" />
+        <result property="failureCause" column="failure_cause" />
+	</resultMap>
+
+</mapper>

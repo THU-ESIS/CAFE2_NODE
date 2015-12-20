@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.tsinghua.cess.task.dao.TaskQueryDao">
+
+    <select id="querySubTaskList" resultMap="subTaskListEntry">
+        select
+            sl.task_id,
+            sl.sub_task_id,
+            sl.node_id
+        from task_subtask_list sl
+        where sl.task_id=#{taskId}
+    </select>
+
+    <resultMap id="subTaskListEntry" type="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
+        <id column="sub_task_id" property="subTaskId" />
+        <result column="task_id" property="taskId" />
+        <result column="node_id" property="nodeId" />
+    </resultMap>
+    
+<!--
+
+    <select id="querySubTaskList" resultMap="subTaskListEntry">
+        select
+            sl.task_id,
+            sl.sub_task_id,
+            sl.node_id,
+            wn.id,
+            wn.name,
+            wn.ip,
+            wn.port,
+            wn.root_path
+        from task_subtask_list sl
+        left join worker_node wn on sl.node_id=wn.id
+        where sl.task_id=#{uuid}
+    </select>
+
+
+
+    <resultMap id="subTaskListEntry" type="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
+        <id column="sub_task_id" property="subTaskId" />
+        <result column="task_id" property="uuid" />
+        <result column="node_id" property="nodeId" />
+
+        <association property="workerNode" javaType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
+            <id column="id" property="id" />
+            <result column="ip" property="ip" />
+            <result column="name" property="name" />
+            <result column="port" property="port" />
+            <result column="root_path" property="rootPath" />
+        </association>
+    </resultMap>
+-->
+
+    <select id="querySubTaskResult" resultMap="subTaskResult">
+        select
+            st.id as sub_task_id,
+            st.model,
+            st.status,
+            st.progress,
+            st.progress_description,
+            st.failure_cause,
+            str.id as result_id,
+            str.type,
+            str.path
+        from sub_task st
+        left join sub_task_result str on st.id=str.sub_task_id
+        where st.id=#{subTaskId}
+    </select>
+
+    <!--id        INT(10) NOT NULL AUTO_INCREMENT,-->
+    <!--uuid      VARCHAR(64) NOT NULL COMMENT 'task的唯一id',-->
+    <!--submition TEXT    NOT NULL,-->
+    <!--create_time DATETIME NOT NULL COMMENT '创建时间',-->
+
+    <select id="queryByUuid" resultType="cn.edu.tsinghua.cess.task.entity.Task">
+        SELECT
+            id,
+            uuid,
+            submition,
+            create_time AS createTime
+        FROM task
+        WHERE uuid=#{uuid}
+    </select>
+
+    <resultMap id="subTaskResult" type="cn.edu.tsinghua.cess.task.entity.SubTask">
+        <id column="sub_task_id" property="id" />
+        <result column="model" property="model" />
+        <result column="status" property="status" />
+        <result column="progress" property="progress" />
+        <result column="progress_description" property="progressDescription" />
+        <result column="failure_cause" property="failureCause" />
+        <collection property="resultFileList" ofType="cn.edu.tsinghua.cess.task.entity.SubTaskResultFile">
+            <id column="result_id" property="id" />
+            <result column="type" property="type" />
+            <result column="path" property="path" />
+        </collection>
+    </resultMap>
+
+</mapper>
