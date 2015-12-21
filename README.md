@@ -1,5 +1,5 @@
 #CAFE_NODE
-To see detailed information about this package, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki).
+To see detailed information about CAFE, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki).
 ##Before your Installation
 `Notice`: This package should be installed on the server-side. Data archives need to be read from this server. As the function of this package is limited by some other external applications, a Linux environment is required. To ensure the node work correctly, following applications have to be installed before your installation:       
 ######1.	MySQL Server and Client (http://www.mysql.com/downloads/ )     
