@@ -41,9 +41,9 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 
 ##Installation procedures
 ######1.	Database preparation. 
-You have to create a user name of your database, generate a database ip address (`jdbc.host`) database port (`jdbc.port`) database user name (`jdbc.user`) and database password (`jdbc.password`) 
+You have to create a user name of your database system, obtain your ip address (`jdbc.host`),access port (`jdbc.port`),user name (`jdbc.user`) and password (`jdbc.password`) 
 ######2.	Creating a database. 
-Grand privileges to the database user (`jdbc.user`) created in `step 1` and generate database name (`jdbc.database`)
+Create a database then grand privileges to the database user (`jdbc.user`) created in `step 1` and obtain the database name (`jdbc.database`)
 ######3.  Creating database tables. 
 The path of initiation script is: `/db-init/src/main/resources/init.sql`
 You have to enter mySQL, use the database in `step2` and run this script.
