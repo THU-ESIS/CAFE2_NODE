@@ -1,13 +1,14 @@
 package cn.edu.tsinghua.cess.modelfile.service.impl;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
+import cn.edu.tsinghua.cess.component.pagination.PagedList;
+import cn.edu.tsinghua.cess.component.pagination.PaginationUtil;
+import cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryParam;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryResult;
+import cn.edu.tsinghua.cess.modelfile.entity.Model;
+import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFields;
+import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFilter;
+import cn.edu.tsinghua.cess.modelfile.service.ModelFileQueryService;
 import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanWrapper;
@@ -16,13 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import cn.edu.tsinghua.cess.component.pagination.PagedList;
-import cn.edu.tsinghua.cess.component.pagination.PaginationUtil;
-import cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao;
-import cn.edu.tsinghua.cess.modelfile.entity.Model;
-import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFields;
-import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFilter;
-import cn.edu.tsinghua.cess.modelfile.service.ModelFileQueryService;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
 
 @Component
 public class ModelFileQueryServiceImpl implements ModelFileQueryService {
@@ -32,22 +31,8 @@ public class ModelFileQueryServiceImpl implements ModelFileQueryService {
 	@Autowired
 	private ModelFileDao modelFileDao;
 	
-	private static ModelFileFilter initialFilter = null;
-	
 	@Override
 	public ModelFileFilter listFilter() {
-		if (initialFilter == null) {
-			synchronized (ModelFileQueryService.class) {
-				if (initialFilter == null) {
-					initialFilter = this.innerListFilter();
-				}
-			}
-		}
-		
-		return initialFilter;
-	}
-	
-	private ModelFileFilter innerListFilter() {
 		return this.doFilter(null);
 	}
 	
