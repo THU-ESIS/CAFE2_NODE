@@ -3,6 +3,7 @@ package cn.edu.tsinghua.cess.task.service.impl.executor;
 import java.util.concurrent.Callable;
 
 import cn.edu.tsinghua.cess.task.entity.SubTask;
+import cn.edu.tsinghua.cess.util.RequestIdBinder;
 import org.apache.log4j.Logger;
 
 import cn.edu.tsinghua.cess.datamanager.nclscript.NclScript;
@@ -24,6 +25,8 @@ public class TaskExecutor implements Runnable {
 	@Override
 	public void run() {
         try {
+            RequestIdBinder.bind();
+
             long begin = System.currentTimeMillis();
             StringBuilder builder = new StringBuilder();
             builder.append("begin to execute task, ")
@@ -32,8 +35,6 @@ public class TaskExecutor implements Runnable {
                     .append("[script=").append(subTask.getScript()).append("]");
 
             log.info(builder.toString());
-
-
 
         	NclScriptContext context = contextBuilder.call();
         	NclScript script = scriptBuilder.call();
@@ -56,8 +57,10 @@ public class TaskExecutor implements Runnable {
                     .append("[exception=").append(ex.getMessage()).append("]");
 
             log.error(builder.toString(), ex);
+        } finally {
+            RequestIdBinder.unbind();
         }
-	}
+    }
 	
 	public static TaskExecutor newInstance(
 			    SubTask subTask,

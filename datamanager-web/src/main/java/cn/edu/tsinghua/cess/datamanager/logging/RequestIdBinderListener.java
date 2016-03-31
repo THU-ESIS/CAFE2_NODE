@@ -1,6 +1,6 @@
 package cn.edu.tsinghua.cess.datamanager.logging;
 
-import org.apache.log4j.MDC;
+import cn.edu.tsinghua.cess.util.RequestIdBinder;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
@@ -10,18 +10,14 @@ import javax.servlet.ServletRequestListener;
  */
 public class RequestIdBinderListener implements ServletRequestListener {
 
-    private static String key = "requestId";
-
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
-        MDC.remove(key);
-
+        RequestIdBinder.unbind();
     }
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-        String requestId = RandomUtil.randomString(8);
-        MDC.put(key, requestId);
+        RequestIdBinder.bind();
     }
 
 }

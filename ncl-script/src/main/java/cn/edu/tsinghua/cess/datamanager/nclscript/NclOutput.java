@@ -6,6 +6,8 @@
 
 package cn.edu.tsinghua.cess.datamanager.nclscript;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,8 @@ import java.util.Properties;
  * @author ericxuhao
  */
 public class NclOutput {
+
+    private static Logger logger = Logger.getLogger(NclOutput.class);
 
     private static String TempFolder;
     //private static String TempFolder="/mnt/CMIP5/cmip5_tmp/";
@@ -30,9 +34,17 @@ public class NclOutput {
 			TempFolder=  prop.getProperty( "TempFolder" ).trim(); 
             ncl_path=  prop.getProperty( "ncl_path" ).trim(); 
             ncl_env=  prop.getProperty( "ncl_env" ).trim(); 
-            ScriptFolder=  prop.getProperty( "ScriptFolder" ).trim();   
+            ScriptFolder=  prop.getProperty( "ScriptFolder" ).trim();
+
+            logger.info("load config.properties succeeded" +
+                    ", tempFoler=" + TempFolder +
+                    ", nclPath=" + ncl_path +
+                    ", nclEnv=" + ncl_env +
+                    ", scriptFoler=" + ScriptFolder
+            );
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("error loading config.properties", e);
+            throw new RuntimeException(e);
         }
     }
     public static void setTempFolder(String tFolder){

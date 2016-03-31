@@ -1,3 +1,6 @@
+
+// TODO: add create_time
+
 DROP TABLE IF EXISTS model_file;
 CREATE TABLE
   model_file
@@ -24,6 +27,7 @@ CREATE TABLE
   temporal_end_hour     VARCHAR(16),
   temporal_end_minute VARCHAR(16),
   geographical_info     VARCHAR(1024),
+  create_time           DATETIME,
 
   INDEX ix_node_id (node_id),
   INDEX ix_institute (institute),
@@ -50,6 +54,7 @@ CREATE TABLE worker_node (
   ip        VARCHAR(16)  NOT NULL,
   port      INT(10)      NOT NULL,
   root_path VARCHAR(1024),
+  create_time           DATETIME,
 
   PRIMARY KEY (id)
 )

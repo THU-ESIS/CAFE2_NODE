@@ -1,4 +1,4 @@
-package cn.edu.tsinghua.cess.datamanager.logging;
+package cn.edu.tsinghua.cess.util;
 
 import java.security.SecureRandom;
 
