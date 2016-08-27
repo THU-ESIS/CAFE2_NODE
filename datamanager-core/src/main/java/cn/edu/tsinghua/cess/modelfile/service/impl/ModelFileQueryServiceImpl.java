@@ -3,13 +3,16 @@ package cn.edu.tsinghua.cess.modelfile.service.impl;
 import cn.edu.tsinghua.cess.component.pagination.PagedList;
 import cn.edu.tsinghua.cess.component.pagination.PaginationUtil;
 import cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao;
+import cn.edu.tsinghua.cess.modelfile.dto.ModelNodeRelation;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryParam;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryResult;
 import cn.edu.tsinghua.cess.modelfile.entity.Model;
 import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFields;
 import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFilter;
 import cn.edu.tsinghua.cess.modelfile.service.ModelFileQueryService;
-import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
+import cn.edu.tsinghua.cess.workernode.service.WorkerNodeManageService;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
@@ -30,6 +33,9 @@ public class ModelFileQueryServiceImpl implements ModelFileQueryService {
 	
 	@Autowired
 	private ModelFileDao modelFileDao;
+
+	@Autowired
+	private WorkerNodeManageService workerNodeManageService;
 	
 	@Override
 	public ModelFileFilter listFilter() {
@@ -111,8 +117,21 @@ public class ModelFileQueryServiceImpl implements ModelFileQueryService {
     }
 
 	@Override
-	public WorkerNode[] queryRelatedNodes(Model[] modelList) {
-		return modelFileDao.queryRelatedNodes(Arrays.asList(modelList)).toArray(new WorkerNode[0]);
+	public ModelNodeRelation[] queryRelatedNodes(Model[] modelList) {
+		List<Model> modelWithNodeId = modelFileDao.queryModelOfLocal(Arrays.asList(modelList));
+
+		return Lists.transform(modelWithNodeId, new Function<Model, ModelNodeRelation>() {
+			@Override
+			public ModelNodeRelation apply(Model model) {
+			    ModelNodeRelation relation = new ModelNodeRelation();
+				relation.setModel(model);
+                relation.setWorkerNode(
+                		workerNodeManageService.queryById(model.getNodeId())
+				);
+
+				return relation;
+			}
+		}).toArray(new ModelNodeRelation[0]);
 	}
 
 	private void fillWithTemporalRange(Model model) {

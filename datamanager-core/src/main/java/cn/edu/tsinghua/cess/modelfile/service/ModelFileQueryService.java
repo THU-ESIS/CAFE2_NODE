@@ -1,15 +1,14 @@
 package cn.edu.tsinghua.cess.modelfile.service;
 
-import java.util.List;
-
-import cn.edu.tsinghua.cess.component.pagination.PagedList;
 import cn.edu.tsinghua.cess.component.remote.Remote;
+import cn.edu.tsinghua.cess.modelfile.dto.ModelNodeRelation;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryParam;
 import cn.edu.tsinghua.cess.modelfile.dto.ModelQueryResult;
 import cn.edu.tsinghua.cess.modelfile.entity.Model;
 import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFilter;
-import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 
 public interface ModelFileQueryService {
@@ -34,7 +33,7 @@ public interface ModelFileQueryService {
 	public List<String> queryModelFile(Model model);
 
 	@Remote("/modelfile/query_related_workernode")
-	public WorkerNode[] queryRelatedNodes(Model[] modelList);
+	public ModelNodeRelation[] queryRelatedNodes(Model[] modelList);
 
 	@Remote(value = "/modelfile/query_by_dto", method = RequestMethod.POST)
 	public ModelQueryResult queryModel(ModelQueryParam param);
