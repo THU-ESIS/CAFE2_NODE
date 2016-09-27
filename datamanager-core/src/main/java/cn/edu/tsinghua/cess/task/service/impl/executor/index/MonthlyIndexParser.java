@@ -50,13 +50,15 @@ public class MonthlyIndexParser implements IndexParser {
 				return 0;
 			}
 			
-			int years = specified.year - year;
-			if (specified.month < month) {
-				return (years - 1) * 12 + (month - specified.month);
-			} else {
-				return years * 12 + (specified.month - month);
-			}
-		}
+            		int ii=((specified.year-1)*12+specified.month)-((year-1)*12+month);
+            		return ii;
+//            int years = specified.year - year;
+//            if (specified.month < month) {
+//                return (years - 1) * 12 + (month - specified.month);
+//            } else {
+//                return years * 12 + (specified.month - month);
+//            }
+		 }
 		
 		boolean isGreaterThan(Month m) {
 			if (year > m.year) {

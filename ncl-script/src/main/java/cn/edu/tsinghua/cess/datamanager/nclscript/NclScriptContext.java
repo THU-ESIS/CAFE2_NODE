@@ -16,8 +16,8 @@ public interface NclScriptContext {
     public int getEndIndex();
     public String getBeginTime(); //add 用户请求的开始时间，如"185001"
     public String getEndTime();   //add 用户请求的结束时间，如"185012"
-    public String getInputFileFolder(); //add 
-    public String getVarName(); //add 
+    public String getInputFileFolder(); //add
+    public String getVarName(); //add
     public int getLatMin();
     public int getLatMax();
     public int getLonMin();
@@ -28,7 +28,7 @@ public interface NclScriptContext {
 
     public void updateProgress(int percentage, String comment);
     public void failed(Exception e);
-    
+
 }
 
 

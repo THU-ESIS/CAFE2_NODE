@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Created by eric on 9/21/16.
  */
-
-package cn.edu.tsinghua.cess.datamanager.nclscript;
-
 /**
  *
  * @author ericxuhao
  */
+package cn.edu.tsinghua.cess.datamanager.nclscript;
 public class TimeOutException extends Exception{
-     public TimeOutException(String msg)  
-    {  
-        super(msg);  
-    }  
+    public TimeOutException(String msg)
+    {
+        super(msg);
+    }
 }
 
