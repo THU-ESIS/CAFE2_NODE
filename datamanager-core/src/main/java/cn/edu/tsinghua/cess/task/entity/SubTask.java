@@ -114,5 +114,19 @@ public class SubTask {
 		
 		return task;
 	}
-	
+
+    @Override
+    public String toString() {
+        return "SubTask{" +
+                "id=" + id +
+                ", modelEntity=" + modelEntity +
+                ", scriptEntity=" + scriptEntity +
+                ", status=" + status +
+                ", progress=" + progress +
+                ", progressDescription='" + progressDescription + '\'' +
+                ", failureCause='" + failureCause + '\'' +
+                ", resultFileList=" + resultFileList +
+                '}';
+    }
+
 }

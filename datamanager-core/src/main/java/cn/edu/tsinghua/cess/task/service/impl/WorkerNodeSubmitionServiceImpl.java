@@ -4,6 +4,7 @@ import cn.edu.tsinghua.cess.component.remote.RemoteServiceFactory;
 import cn.edu.tsinghua.cess.deployment.entity.Deployment;
 import cn.edu.tsinghua.cess.deployment.service.DeploymentService;
 import cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao;
+import cn.edu.tsinghua.cess.modelfile.dto.ModelNodeRelation;
 import cn.edu.tsinghua.cess.modelfile.entity.Model;
 import cn.edu.tsinghua.cess.modelfile.service.ModelFileQueryService;
 import cn.edu.tsinghua.cess.task.dao.TaskSubmitionDao;
@@ -18,10 +19,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Component("workerNodeSubmitionService")
 public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
@@ -51,6 +49,22 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 		}
 	}
 
+	private Map<WorkerNode, Set<Model>> classify(ModelNodeRelation[] relations) {
+		Map<WorkerNode, Set<Model>> result = new HashMap<WorkerNode, Set<Model>>();
+
+        for (ModelNodeRelation relation : relations) {
+        	Set<Model> set = result.get(relation.getWorkerNode());
+			if (set == null) {
+				set = new HashSet<Model>();
+				result.put(relation.getWorkerNode(), set);
+			}
+
+			set.add(relation.getModel());
+		}
+
+		return result;
+	}
+
 	@Override
 	public String submitTask(TaskSubmition submition) {
 		log.info("submitTask called, submition=" + submition);
@@ -65,15 +79,27 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 
 		taskSubmitionDao.insert(task);
 
-		WorkerNode[] workerNodeList = getCentralModelFileQueryService().queryRelatedNodes(submition.getModels().toArray(new Model[0]));
+        // query model file related workerNodes
+		// note that some model file may exist on multiple workerNode
+        // this central modelfile query service will filter out duplicated models
+		// only remaining one single model for the duplicating ones
+		ModelNodeRelation[] modelNodeRelations = getCentralModelFileQueryService().queryRelatedNodes(submition.getModels().toArray(new Model[0]));
+        Map<WorkerNode, Set<Model>> workerModelSetMap = this.classify(modelNodeRelations);
 
-    	log.info("this submition will involve [count=" + workerNodeList.length + "] workerNodes");
+    	log.info("this submition will involve [count=" + workerModelSetMap.size() + "] workerNodes");
 
-		for (WorkerNode workerNode : workerNodeList) {
+		for (Map.Entry<WorkerNode, Set<Model>> mapEntry : workerModelSetMap.entrySet()) {
+			WorkerNode workerNode = mapEntry.getKey();
+            List<Model> modelList = new ArrayList<Model>(mapEntry.getValue());
+
+            TaskSubmition nodeSubmition = new TaskSubmition();
+			nodeSubmition.setModels(modelList);
+			nodeSubmition.setNclScript(submition.getNclScript());
+
 			try {
 				log.info("begin to submit subtask on [workerNodeId=" + workerNode.getId() + "]");
 
-				List<Integer> subTaskIds = getSubmitionServiceByNode(workerNode).submitSubTask(submition);
+				List<Integer> subTaskIds = getSubmitionServiceByNode(workerNode).submitSubTask(nodeSubmition);
 
 				log.info("successfully submitted subtask, [result=" + subTaskIds + "]");
 

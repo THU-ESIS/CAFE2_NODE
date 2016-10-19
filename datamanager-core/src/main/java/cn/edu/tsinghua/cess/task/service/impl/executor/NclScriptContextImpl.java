@@ -13,11 +13,14 @@ import cn.edu.tsinghua.cess.task.service.impl.executor.index.Index;
 import cn.edu.tsinghua.cess.task.service.impl.executor.index.IndexParser;
 import cn.edu.tsinghua.cess.task.service.impl.executor.index.IndexParserFactory;
 import cn.edu.tsinghua.cess.task.service.impl.executor.index.TemporalRange;
+import org.apache.log4j.Logger;
 
 /**
  * Created by kurt on 2014/9/17.
  */
 public class NclScriptContextImpl implements NclScriptContext {
+
+    private static Logger logger = Logger.getLogger(NclScriptContextImpl.class);
 
 	private Integer subTaskId;
     private Model model;
@@ -105,11 +108,31 @@ public class NclScriptContextImpl implements NclScriptContext {
     public void failed(Exception e) {
         ExceptionHandler.wrapAsUnchecked(e);
     }
-    
+
+
+    @Override
+    public String toString() {
+        return "NclScriptContextImpl{" +
+                "subTaskId=" + subTaskId +
+                ", model=" + model +
+                ", argument=" + argument +
+                ", taskExecutionDao=" + taskExecutionDao +
+                ", inputFileFolder='" + inputFileFolder + '\'' +
+                ", ncFileList=" + ncFileList +
+                ", beginIndex=" + beginIndex +
+                ", endIndex=" + endIndex +
+                '}';
+    }
+
     public static NclScriptContext newInstance(
     			SubTask subTask,
     			TaskExecutionDao taskExecutionDao,
     			ModelFileQueryService modelFileQueryService) {
+
+        logger.info("begin to construct NclScriptContext, subTask=" + subTask.toString());
+
+
+
     	NclScriptContextImpl context = new NclScriptContextImpl();
     	
         context.subTaskId = subTask.getId();
@@ -129,7 +152,9 @@ public class NclScriptContextImpl implements NclScriptContext {
         
         String file = context.ncFileList.get(0);
     	context.inputFileFolder = file.substring(0, file.lastIndexOf('/'));
-        
+
+        logger.info("contructed context=" + context.toString());
+
         return context;
     }
 

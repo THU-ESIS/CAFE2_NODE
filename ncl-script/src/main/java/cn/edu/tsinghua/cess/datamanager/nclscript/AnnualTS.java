@@ -28,22 +28,12 @@ public class AnnualTS implements NclScript{
         File file_cdo=cExecutor.getCdoData(context, file_ori,45);     
         File file_year=cExecutor.getYearData(context, file_cdo,60);
         OutputFile[] outputFiles=new OutputFile[2];
-        String Alia="TS-ANN_"+lat_min+"_"+lat_max+"_"+lon_min+"_"+lon_max;
+        String Alia="TS-ANN_"+lat_min+"-"+lat_max+"_"+lon_min+"-"+lon_max;
         outputFiles[0]=new OutputFile(NclScriptContext.RESULT_TYPE_TXT,new String[]{Alia},new String[]{"txt_name"},1);
         outputFiles[1]=new OutputFile(NclScriptContext.RESULT_TYPE_FIG,new String[]{Alia},new String[]{"fig_name"},1);
         cExecutor.runNcl(context, file_year, outputFiles, CmdExecutor.FIGURE_TYPE_ADDBOTH,"AnnualTS.ncl", null);
-        try {
-             Process p4 = Runtime.getRuntime().exec("rm "+file_ori.getAbsolutePath());
-             p4.waitFor();
-             Process p5 = Runtime.getRuntime().exec("rm "+file_cdo.getAbsolutePath());
-             p5.waitFor();
-             Process p6 = Runtime.getRuntime().exec("rm "+file_year.getAbsolutePath());
-             p6.waitFor();
-        } catch (IOException ex) {
-             context.failed(ex);
-        } catch (InterruptedException ex) {
-             context.failed(ex);
-        }
-        context.updateProgress(100, "Task accomplished!"); 
+        cExecutor.rmData(context,file_ori);
+        cExecutor.rmData(context,file_cdo);
     }
 }
+

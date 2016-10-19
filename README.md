@@ -29,7 +29,7 @@ sudo apt-get install netcdf-bin       #For Ubuntu user
 
 ######Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file `/config/src/main/resources/baseResources/config.properties` and set the values of four parameters. The default setting is as follows:    
 ```Bash 
-1.	TempFolder=/usr/local/cmip5_tmp/               #The folder stores temp files
+1.	TempFolder=/usr/local/nclscripts/               #The folder stores temp files
 2.	ncl_path=/usr/local/ncl/bin/ncl                #The installation path of NCL
 3.	ncl_env=NCARG_ROOT=/usr/local/ncl              #The environment variable of NCL
 4.	ScriptFolder=/usr/local/nclscripts/            #The folder stores analytic scripts
