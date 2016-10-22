@@ -49,17 +49,34 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 		}
 	}
 
+	/**
+	 * will assure that duplicat model accross multiple nodes will only be accounted once with arbitrary random node
+	 * @param relations
+	 * @return
+	 */
 	private Map<WorkerNode, Set<Model>> classify(ModelNodeRelation[] relations) {
+
+		Set<Model> containedModels = new HashSet<Model>();
+
+
 		Map<WorkerNode, Set<Model>> result = new HashMap<WorkerNode, Set<Model>>();
 
         for (ModelNodeRelation relation : relations) {
+        	Model model = relation.getModel();
+
+        	if (containedModels.contains(model)) {
+        		continue;
+			}
+
+
         	Set<Model> set = result.get(relation.getWorkerNode());
 			if (set == null) {
 				set = new HashSet<Model>();
 				result.put(relation.getWorkerNode(), set);
 			}
 
-			set.add(relation.getModel());
+			set.add(model);
+			containedModels.add(model);
 		}
 
 		return result;
