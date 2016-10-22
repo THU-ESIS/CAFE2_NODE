@@ -60,7 +60,14 @@ public class ModelFileQueryServiceImpl implements ModelFileQueryService {
 
 			@Override
 			public List<Model> call() throws Exception {
-				return modelFileDao.queryModel(filter);
+//				return modelFileDao.queryModel(filter);
+
+				// since 206-10-21 by kurtyan777@gmail.com
+				// client progrem demand distinct model when duplicated model exist on multiple node
+				// so we made this query distinct model method, only one of duplicated modes will be counted
+                return modelFileDao.queryDistinctModel(filter);
+
+
 			}
 
 		});

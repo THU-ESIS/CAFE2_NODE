@@ -58,6 +58,30 @@
 		order by nodeName, institute, model, experiment, frequency, modeling_realm, emr, emi, emp, variable_name
 	</select>
 
+	<select id="queryDistinctModel" resultType="cn.edu.tsinghua.cess.modelfile.entity.Model">
+		select
+			wn.id as nodeId,
+			wn.name as nodeName,
+			institute,
+			model,
+			experiment,
+			frequency,
+			modeling_realm	as modelingRealm,
+			ensemble_member	as ensembleMember,
+			variable_name	as variableName,
+			<include refid="emr" />,
+			<include refid="emi" />,
+			<include refid="emp" />
+		from model_file
+        left join worker_node wn on model_file.node_id=wn.id
+		where
+			1=1
+			<include refid="ensureTemporal"/>
+			<include refid="filterFields" />
+        group by institute, model, experiment, frequency, modeling_realm, ensemble_member, variable_name
+		order by institute, model, experiment, frequency, modeling_realm, emr, emi, emp, variable_name
+	</select>
+
     <select id="queryModelOfNode" resultType="cn.edu.tsinghua.cess.modelfile.entity.Model">
         select distinct
             node_id as nodeId,

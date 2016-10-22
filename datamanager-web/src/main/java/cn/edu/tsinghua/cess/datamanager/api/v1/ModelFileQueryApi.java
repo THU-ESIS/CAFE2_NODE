@@ -29,6 +29,10 @@ public class ModelFileQueryApi {
 	@Autowired DeploymentService deploymentService;
 	@Autowired RemoteServiceFactory remoteServiceFactory;
 
+	/**
+	 * serve both client request and server remote request
+	 * @return
+	 */
 	@RequestMapping(value = "/modelfile/query/filter", method = { RequestMethod.GET, RequestMethod.POST } )
 	@ResponseBody
 	public ApiResult queryFilter() {
@@ -50,18 +54,6 @@ public class ModelFileQueryApi {
 			ModelFileQueryService remoteModelFileQueryService = remoteServiceFactory.getRemoteService(deployment.getCentralServer(), ModelFileQueryService.class);
 			return remoteModelFileQueryService;
 		}
-	}
-
-	@RequestMapping(value = "/modelfile/query_related_workernode", method = RequestMethod.POST)
-	@ResponseBody
-	public ApiResult queryRelatedWorkerNode(@RequestBody final Model[] modelList) {
-		return ApiUtil.execute(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				return service.queryRelatedNodes(modelList);
-			}
-		});
-
 	}
 	
 	@RequestMapping(value = "/modelfile/query", method = RequestMethod.GET)
@@ -89,18 +81,7 @@ public class ModelFileQueryApi {
 		});
 	}
 
-	@RequestMapping(value = "/modelfile/query_by_dto", method = RequestMethod.POST)
-	@ResponseBody
-	public ApiResult queryByDto(@RequestBody final ModelQueryParam modelQueryParam) {
-		logger.info("param=" + modelQueryParam);
 
-		return ApiUtil.execute(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				return service.queryModel(modelQueryParam);
-			}
-		});
-	}
 	
 	private ModelFileFilter createFilter(
 			List<String> institute,
