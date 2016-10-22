@@ -10,6 +10,7 @@ import cn.edu.tsinghua.cess.task.entity.SubTaskResultFile;
 import cn.edu.tsinghua.cess.task.entity.Task;
 import cn.edu.tsinghua.cess.task.entity.dto.SubTaskFile;
 import cn.edu.tsinghua.cess.task.entity.dto.SubTaskResult;
+import cn.edu.tsinghua.cess.task.entity.dto.TaskSubmition;
 import cn.edu.tsinghua.cess.task.service.TaskQueryService;
 import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
 import cn.edu.tsinghua.cess.workernode.service.WorkerNodeManageService;
@@ -52,11 +53,20 @@ public class TaskQueryServiceImpl implements TaskQueryService {
         }
         
         log.info("query subTaskListEntry of [taskId=" + uuid + "], got [" + subTaskList + "]");
-        
-        return this.queryByDeployMode(subTaskList);
+        List<SubTaskResult> subTaskResultList = this.queryByDeployMode(subTaskList);
+
+        return this.sortWithSubmitOrder(task.getSubmitionEntity(), subTaskResultList).toArray(new SubTaskResult[0]);
     }
 
-    private SubTaskResult[] queryByDeployMode(List<SubTaskListEntry> subTaskList) {
+    private List<SubTaskResult> sortWithSubmitOrder(TaskSubmition taskSubmition, List<SubTaskResult> subTaskResultList) {
+        Collections.sort(subTaskResultList, new ModelSubmitionOrderSortingComparator(
+                taskSubmition.getModels()
+        ));
+
+        return subTaskResultList;
+    }
+
+    private List<SubTaskResult> queryByDeployMode(List<SubTaskListEntry> subTaskList) {
         Deployment deployment = deploymentService.get();
         switch (deployment.getMode()) {
             case DISTRIBUTED_WORKER:
@@ -126,7 +136,7 @@ public class TaskQueryServiceImpl implements TaskQueryService {
         return result;
     }
 
-    private SubTaskResult[] queryAsLocal(List<SubTaskListEntry> subTaskList) {
+    private List<SubTaskResult> queryAsLocal(List<SubTaskListEntry> subTaskList) {
     	log.info("queryAsLocal called");
     	
         List<Integer> subTaskIdList = new ArrayList<Integer>();
@@ -134,10 +144,12 @@ public class TaskQueryServiceImpl implements TaskQueryService {
             subTaskIdList.add(entry.getSubTaskId());
         }
 
-        return querySubTaskResult(subTaskIdList.toArray(new Integer[0]));
+        return new ArrayList<SubTaskResult>(Arrays.asList(
+            querySubTaskResult(subTaskIdList.toArray(new Integer[0]))
+        ));
     }
 
-    private SubTaskResult[] queryByWorkerNode(List<SubTaskListEntry> subTaskList) {
+    private List<SubTaskResult> queryByWorkerNode(List<SubTaskListEntry> subTaskList) {
     	log.info("queryByWorkerNode called");
     	
         List<SubTaskResult> subTaskResultList = new ArrayList<SubTaskResult>();
@@ -165,7 +177,7 @@ public class TaskQueryServiceImpl implements TaskQueryService {
             subTaskResultList.addAll(Arrays.asList(subTaskResultListOfNode));
         }
 
-        return subTaskResultList.toArray(new SubTaskResult[0]);
+        return subTaskResultList;
     }
 
 	@Override

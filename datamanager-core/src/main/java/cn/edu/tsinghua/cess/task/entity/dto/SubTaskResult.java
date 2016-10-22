@@ -1,13 +1,15 @@
 package cn.edu.tsinghua.cess.task.entity.dto;
 
 import cn.edu.tsinghua.cess.modelfile.entity.Model;
+import cn.edu.tsinghua.cess.task.entity.ModelProvider;
 import cn.edu.tsinghua.cess.task.entity.SubTaskStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SubTaskResult {
+public class SubTaskResult implements ModelProvider {
 	
     private Model model;
     private SubTaskStatus status;
@@ -63,6 +65,12 @@ public class SubTaskResult {
 
     public void setResultFile(List<SubTaskFile> resultFile) {
         this.resultFile = resultFile;
+    }
+
+    @JsonIgnore
+    @Override
+    public Model getModelEntity() {
+        return this.getModel();
     }
 
 }

@@ -1,10 +1,12 @@
 package cn.edu.tsinghua.cess.modelfile.entity;
 
+import cn.edu.tsinghua.cess.task.entity.ModelProvider;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
-public class Model {
+public class Model implements ModelProvider {
 
     /* properties to be set while being persisted */
     private Integer nodeId;
@@ -137,6 +139,12 @@ public class Model {
 			", temporalStart='" + temporalStart + '\'' +
 			", temporalEnd='" + temporalEnd + '\'' +
 			'}';
+	}
+
+	@JsonIgnore
+	@Override
+	public Model getModelEntity() {
+	    return this;
 	}
 
 }
