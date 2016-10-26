@@ -47,7 +47,7 @@ sudo apt-get install maven       #For Ubuntu user
 3.	ncl_env=NCARG_ROOT=/usr/local/ncl              #The environment variable of NCL
 4.	ScriptFolder=/usr/local/nclscripts/            #The folder stores analytic scripts
 ```
-######As a beginner, you have to download default analytic scripts [CAFE_SCRIPTS](https://github.com/THU-EarthInformationScienceLab/CAFE_SCRIPTS) and place the `nclscripts` folder under `ScriptFolder` so that you could successfully use these analytic functions.
+######As a beginner, you need to download default analytic scripts [CAFE_SCRIPTS](https://github.com/THU-EarthInformationScienceLab/CAFE_SCRIPTS) and place all the scripts in `nclscripts` folder to the `ScriptFolder` so that you could later make use of these analytic functions.
 
 #####PAY ATTENTION: Since this version only support `CF-compliant netCDF files`, you may have to reorganize the file names and directories of your data to the specific structure. You may have to refer to this site to reorganize your data archive: `http://cmip-pcmdi.llnl.gov/cmip5/output_req.html ` A software has been provided for reorganization in this web page.
 #####When all the preparations are done, you could begin to set up this package.
