@@ -9,7 +9,7 @@ sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 ######2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
-After installed Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
+After installing Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
 and create a tomcat user by modifying the file "tomcat/conf/tomcat-users.xml"
 ```     
 ######3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
