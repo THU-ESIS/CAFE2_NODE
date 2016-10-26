@@ -9,6 +9,8 @@ sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 ######2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
+After installed Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
+and create a tomcat user by modifying the file "tomcat/conf/tomcat-users.xml"
 ```     
 ######3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 `Warning`: You may have to configure environment variables as below.
@@ -76,7 +78,8 @@ mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${
 ```
 you have to replace ${} to the parameters in `step1` and `step2`, for example:
 ```Bash 
-mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=model_data -Djdbc.user=abc -Djdbc.password=123456
+mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=CAFENODE -Djdbc.user=abc -Djdbc.password=123456 -DlogDir=/usr/local/CAFE/log
+${logDir} is your log directory for CAFE.
 ```
 ######5.  Deploying the war package under the Tomcat.
 You could name the `.war` package and place it under `tomcat/webapps`. Then you have to start Tomcat service. The name of the war package will determine the access path of the web application. For example, if the name of the war package is `datamanager-worker.war`, then after deployment, the access address will be `[host]:[port]/datamanager-worker`
