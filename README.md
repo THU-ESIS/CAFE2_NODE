@@ -54,12 +54,21 @@ sudo apt-get install maven       #For Ubuntu user
 
 ##Installation procedures
 ######1.	Database preparation. 
-You have to create a user name of your database system, obtain your ip address (`jdbc.host`),access port (`jdbc.port`),user name (`jdbc.user`) and password (`jdbc.password`) 
+You have to create a user name of your database system using mySQL root account, obtain your ip address (`jdbc.host`),access port (`jdbc.port`),user name (`jdbc.user`) and password (`jdbc.password`) 
+```Bash 
+e.g. CREATE USER 'username'@'host' IDENTIFIED BY 'password'; 
+```
 ######2.	Creating a database. 
 Create a database then grand privileges to the database user (`jdbc.user`) created in `step 1` and obtain the database name (`jdbc.database`)
+```Bash 
+e.g. GRANT all privileges ON CAFENODE.* TO 'username'@'host'
+```
 ######3.  Creating database tables. 
 The path of initiation script is: `/db-init/src/main/resources/init.sql`
 You have to enter mySQL, use the database in `step2` and run this script.
+```Bash 
+source init.sql
+```
 ######4.  Packaging.
 You could use following command to generate a `.war` package:
 ```Bash 
