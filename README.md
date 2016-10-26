@@ -72,7 +72,8 @@ You have to enter mySQL, use the database in `step2` and run this script.
 source init.sql
 ```
 ######4.  Packaging.
-You could use following command to generate a `.war` package:
+You have to enter the root directory of CAFE_NODE folder.
+Then you could use following command to compile the codes and generate a `.war` package:
 ```Bash 
 mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${jdbc.port} -Djdbc.database=${jdbc.database} -Djdbc.user=${ jdbc.user} -Djdbc.password=${jdbc.password} -DlogDir=${logDir}
 ```
