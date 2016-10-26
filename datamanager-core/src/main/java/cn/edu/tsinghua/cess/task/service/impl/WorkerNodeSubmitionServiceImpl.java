@@ -49,42 +49,77 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 		}
 	}
 
+	/**
+	 * will assure that duplicat model accross multiple nodes will only be accounted once with arbitrary random node
+	 * @param relations
+	 * @return
+	 */
 	private Map<WorkerNode, Set<Model>> classify(ModelNodeRelation[] relations) {
+
+		Set<Model> containedModels = new HashSet<Model>();
+
+
 		Map<WorkerNode, Set<Model>> result = new HashMap<WorkerNode, Set<Model>>();
 
         for (ModelNodeRelation relation : relations) {
+        	Model model = relation.getModel();
+
+        	if (containedModels.contains(model)) {
+        		continue;
+			}
+
+
         	Set<Model> set = result.get(relation.getWorkerNode());
 			if (set == null) {
 				set = new HashSet<Model>();
 				result.put(relation.getWorkerNode(), set);
 			}
 
-			set.add(relation.getModel());
+			set.add(model);
+			containedModels.add(model);
 		}
 
 		return result;
 	}
 
+	private TaskSubmition getActualSubmition(TaskSubmition submition, Map<WorkerNode, Set<Model>> workerNodeSetMap) {
+		List<Model> actualSubmitionModels = new ArrayList<Model>();
+		for (Set<Model> models : workerNodeSetMap.values()) {
+			actualSubmitionModels.addAll(models);
+		}
+
+		Collections.sort(actualSubmitionModels, new ModelSubmitionOrderSortingComparator(
+				submition.getModels()
+		));
+
+	    TaskSubmition actualSubmition = new TaskSubmition();
+        actualSubmition.setNclScript(submition.getNclScript());
+		actualSubmition.setModels(actualSubmitionModels);
+
+		return actualSubmition;
+	}
+
 	@Override
 	public String submitTask(TaskSubmition submition) {
 		log.info("submitTask called, submition=" + submition);
-
 		Date ts = new Date();
-		String taskId = UUID.randomUUID().toString();
 
-		Task task = new Task();
-		task.setUuid(taskId);
-		task.setCreateTime(ts);
-		task.setSubmitionEntity(submition);
-
-		taskSubmitionDao.insert(task);
-
-        // query model file related workerNodes
+		// query model file related workerNodes
 		// note that some model file may exist on multiple workerNode
-        // this central modelfile query service will filter out duplicated models
+		// this central modelfile query service will filter out duplicated models
 		// only remaining one single model for the duplicating ones
 		ModelNodeRelation[] modelNodeRelations = getCentralModelFileQueryService().queryRelatedNodes(submition.getModels().toArray(new Model[0]));
-        Map<WorkerNode, Set<Model>> workerModelSetMap = this.classify(modelNodeRelations);
+		Map<WorkerNode, Set<Model>> workerModelSetMap = this.classify(modelNodeRelations);
+
+
+		Task task = new Task();
+		task.setUuid(UUID.randomUUID().toString());
+		task.setCreateTime(ts);
+		task.setSubmitionEntity(
+				this.getActualSubmition(submition, workerModelSetMap)
+		);
+
+		taskSubmitionDao.insert(task);
 
     	log.info("this submition will involve [count=" + workerModelSetMap.size() + "] workerNodes");
 
@@ -117,7 +152,7 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 			}
 		}
 
-		return taskId;
+		return task.getUuid();
 	}
 
 	@Override
