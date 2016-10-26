@@ -2,7 +2,7 @@
 To see detailed information about CAFE, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki).
 ##Before your Installation
 `Notice`: This package should be installed on the server-side. Data archives need to be read from this server. As the function of this package is limited by some other external applications, a Linux environment is required. To ensure the node work correctly, following applications have to be installed before your installation:       
-######1.	MySQL Server and Client (http://www.mysql.com/downloads/ )     
+######1.	MySQL Server and Client (http://dev.mysql.com/downloads/mysql/5.6.html#downloads )     
 ```Bash 
 sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 ```     
@@ -10,23 +10,36 @@ sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
 ```     
-######3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html )    
+######3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+`Warning`: You may have to configure environment variables as below.
+```Bash
+##java
+export JAVA_HOME=/usr/local/java/jdk1.7.0_51
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+```
 ######4.	NCL 6.1.2 or higher version (https://www.earthsystemgrid.org/dataset/ncl.630.html  )    
 `Warning`: To ensure the node work correctly, we highly recommend you to install NCL in the default directory /usr/local/ncl and set the environment variable as NCARG_ROOT=/usr/local/ncl    
 ######5.	CDO 1.6.4 or higher version (Climate Data Operator, https://code.zmaw.de/projects/cdo/ )    
 ```Bash 
 sudo apt-get install cdo       #For Ubuntu user
 ```     
+we highly recommand you to use annaconda to install the latest version using command "‘conda install -c conda-forge nco".
 ######6.	NCO（NetCDF Operator, http://nco.sourceforge.net/ ）     
 ```Bash 
 sudo apt-get install nco       #For Ubuntu user
 ```   
+we highly recommand you to use annaconda to install the latest version using command "‘conda install -c conda-forge cdo".
 ######7.	netcdf library (optional, http://www.unidata.ucar.edu/downloads/netcdf/index.jsp ) 
 ```Bash 
 sudo apt-get install netcdf-bin       #For Ubuntu user
 ```
+we highly recommand you to use annaconda to install the latest version of netcdf4 using command "‘conda install -c conda-forge netcdf4".
 ######8.	Maven. （http://maven.apache.org/download.cgi ）
-
+```Bash 
+sudo apt-get install maven       #For Ubuntu user
+```
 ######Before your installation, you could set the parameters in the configuration file to ensure the application work correctly.You could modify this file `/config/src/main/resources/baseResources/config.properties` and set the values of four parameters. The default setting is as follows:    
 ```Bash 
 1.	TempFolder=/usr/local/nclscripts/               #The folder stores temp files
