@@ -74,11 +74,11 @@ source init.sql
 ######4.  Packaging.
 You could use following command to generate a `.war` package:
 ```Bash 
-mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${jdbc.port} -Djdbc.database=${jdbc.database} -Djdbc.user=${ jdbc.user} -Djdbc.password=${jdbc.password}
+mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${jdbc.port} -Djdbc.database=${jdbc.database} -Djdbc.user=${ jdbc.user} -Djdbc.password=${jdbc.password} -DlogDir=${logDir}
 ```
 you have to replace ${} to the parameters in `step1` and `step2`, for example:
 ```Bash 
-mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=CAFENODE -Djdbc.user=abc -Djdbc.password=123456 -DlogDir=/usr/local/CAFE/log
+mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=CAFENODE -Djdbc.user=abc -Djdbc.password=123456 -DlogDir=/usr/local/CAFE/log 
 ${logDir} is your log directory for CAFE.
 ```
 ######5.  Deploying the war package under the Tomcat.
