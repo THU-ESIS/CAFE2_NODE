@@ -77,8 +77,9 @@ e.g. # if the name of your database called CAFENODE, then jdbc.database=CAFENODE
 ######3.  Creating database tables. 
 The path of initiation script is: `db-init/src/main/resources/init.sql`
 You should first enter the directory `db-init/src/main/resources` of the CAFE-NODE source code folder.
-Then You have to enter mySQL using command line 'mysql -u {username} -p', use the database in `step2` and run this script.
+Then You have to enter mySQL using command line `mysql -u {username} -p`, use the database in `step2` and run this script.
 ```Bash 
+use {jdbc.database}
 source init.sql;
 ```
 ######4.  Packaging.
