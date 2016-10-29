@@ -5,7 +5,9 @@ To see detailed information about CAFE, please check the [wiki page](https://git
 ######1.	MySQL Server and Client (http://dev.mysql.com/downloads/mysql/5.6.html#downloads )     
 ```Bash 
 sudo apt-get install mysql-server mysql-client  #For Ubuntu user
-```     
+sudo service mysql start #open mysql service
+``` 
+`Warning`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row start with `bind-address`
 ######2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
@@ -56,20 +58,27 @@ sudo apt-get install maven       #For Ubuntu user
 
 ##Installation procedures
 ######1.	Database preparation. 
-You have to create a user name of your database system using mySQL root account, obtain your ip address (`jdbc.host`),access port (`jdbc.port`),user name (`jdbc.user`) and password (`jdbc.password`) 
+You have to create a user for your database system using mySQL root account, obtain your ip address {`jdbc.host`},database access port {`jdbc.port`},database user name {`jdbc.user`} and password of the database user {`jdbc.password`}
 ```Bash 
-e.g. CREATE USER 'username'@'host' IDENTIFIED BY 'password'; 
+e.g. CREATE USER 'username'@'%' IDENTIFIED BY 'password'; 
 ```
+`Note`: To ensure the database can be connected using ip and from remote servers, '%' should be used.
 ######2.	Creating a database. 
-Create a database then grand privileges to the database user (`jdbc.user`) created in `step 1` and obtain the database name (`jdbc.database`)
+Create a database then grand privileges to the database user {`jdbc.user`} created in `step 1` and obtain the database name {`jdbc.database`}
 ```Bash 
-e.g. GRANT all privileges ON CAFENODE.* TO 'username'@'host'
+e.g. # if the name of your database called CAFENODE, then jdbc.database=CAFENODE
+     # if your username is guest, password is '123456', then jdbc.user=geust, jdbc.password=123456
+     # you can enter mySQL using command line 'mysql -u guest -p', then use following codes.
+     GRANT all privileges ON CAFENODE.* TO 'username'@'%'
+     FLUSH PRIVILEGES;
 ```
+`Note`: To ensure the database can be connected using ip and from remote servers, '%' should be used.
 ######3.  Creating database tables. 
-The path of initiation script is: `/db-init/src/main/resources/init.sql`
-You have to enter mySQL, use the database in `step2` and run this script.
+The path of initiation script is: `db-init/src/main/resources/init.sql`
+You should first enter the directory `db-init/src/main/resources` of the CAFE-NODE source code folder.
+Then You have to enter mySQL using command line 'mysql -u {username} -p', use the database in `step2` and run this script.
 ```Bash 
-source init.sql
+source init.sql;
 ```
 ######4.  Packaging.
 You have to enter the root directory of CAFE_NODE folder.
@@ -77,14 +86,16 @@ Then you could use following command to compile the codes and generate a `.war` 
 ```Bash 
 mvn clean package -Dmaven.test.skip=true -Djdbc.host=${jdbc.host} -Djdbc.port=${jdbc.port} -Djdbc.database=${jdbc.database} -Djdbc.user=${ jdbc.user} -Djdbc.password=${jdbc.password} -DlogDir=${logDir}
 ```
+`Note`:the `.war` package is under `datamanager-web/target/`
 you have to replace ${} to the parameters in `step1` and `step2`, for example:
 ```Bash 
 mvn clean package -Dmaven.test.skip=true -Djdbc.host=101.100.101.100 -Djdbc.port=3306 -Djdbc.database=CAFENODE -Djdbc.user=abc -Djdbc.password=123456 -DlogDir=/usr/local/CAFE/log 
-${logDir} is your log directory for CAFE.
+# ${logDir} is your log directory for CAFE. If this directory does not exit, have to create it first.
 ```
 ######5.  Deploying the war package under the Tomcat.
-You could name the `.war` package and place it under `tomcat/webapps`. Then you have to start Tomcat service. The name of the war package will determine the access path of the web application. For example, if the name of the war package is `datamanager-worker.war`, then after deployment, the access address will be `[host]:[port]/datamanager-worker`
+You could rename the `.war` package and place it under `tomcat/webapps`. Then you have to start Tomcat service. The name of the war package will determine the access path of the web application. For example, if the name of the war package is `datamanager-worker.war`, then after deployment, the access address will be `http://{host}:{port}/datamanager-worker`
+`Note`:{host} is the ip address of the node, and {port} is tomcat port. You can also use tomcat management webpage to deploy the package. 
 ######6.  Choosing deployment mode.
-You could access this web page（`http://{host}:{port}/datamanager-web/web/deployment`） to choose deployment mode. Generally, in a complete infrastructure, there are one central node and several worker nodes, all the worker nodes are peer-to-peer.
+You could access this web page（`http://{host}:{port}/{war package name}/web/deployment`） to choose deployment mode. Generally, in a complete infrastructure, there are one central node and several worker nodes, all the worker nodes are peer-to-peer.
 ######7.  Data indexing.      
-For worker wodes, you could access the web page `http://{host}: {port}/datamanager-web/web/parser`, enter the root folder of the data archive and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
+For worker wodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, enter the root folder of the data archive and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
