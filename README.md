@@ -7,13 +7,14 @@ To see detailed information about CAFE, please check the [wiki page](https://git
 sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 sudo service mysql start #open mysql service
 ``` 
-`Warning`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row start with `bind-address`
+`Note`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row starts with `bind-address`
 ######2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
 After installing Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
 and create a tomcat user by modifying the file "tomcat/conf/tomcat-users.xml"
-```     
+```
+`Note`:You can refer to (http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html#Configuring_Manager_Application_Access) for more details about configuring Tomcat managers.
 ######3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 `Warning`: You may have to configure environment variables as below.
 ```Bash
@@ -97,5 +98,6 @@ You could rename the `.war` package and place it under `tomcat/webapps`. Then yo
 `Note`:{host} is the ip address of the node, and {port} is tomcat port. You can also use tomcat management webpage to deploy the package. 
 ######6.  Choosing deployment mode.
 You could access this web page（`http://{host}:{port}/{war package name}/web/deployment`） to choose deployment mode. Generally, in a complete infrastructure, there are one central node and several worker nodes, all the worker nodes are peer-to-peer.
+`Note`:the root path of your Node is `/{war package name}`, for example, if your war name is `datamanager-worker.war`, the root path will be `datamanager-worker`. The `{port}` is the port of Tomcat.
 ######7.  Data indexing.      
-For worker wodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, enter the root folder of the data archive and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
+For worker nodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, input the root folder of the data archive mounted on the node server and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
