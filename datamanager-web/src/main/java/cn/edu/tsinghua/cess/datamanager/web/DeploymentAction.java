@@ -50,7 +50,7 @@ public class DeploymentAction {
         return "redirect:";  // after deployment, redirect the browser to "/web/deployment" as to show the result
 	}
 	
-	@RequestMapping("")
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView showDeployment() {
         try {
             Deployment deployment = deploymentService.get();
