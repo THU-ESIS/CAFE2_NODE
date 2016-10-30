@@ -3,6 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao">
 
+	<sql id="matchModel">
+        model_file.institute=binary #{model.institute}
+        and model_file.model=binary #{model.model}
+        and model_file.experiment=binary #{model.experiment}
+        and model_file.frequency=binary #{model.frequency}
+        and model_file.modeling_realm=binary #{model.modelingRealm}
+        and model_file.ensemble_member=binary #{model.ensembleMember}
+        and model_file.variable_name=binary #{model.variableName}
+	</sql>
+
     <select id="queryRelatedNodes" resultType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
         select
             wn.id as id,
@@ -18,17 +28,7 @@
                 1=1
             <if test="modelList != null and modelList.size > 0">
                 and
-                <foreach collection="modelList" item="model" open="(" separator=" or " close=")">
-                    (
-                        model_file.institute=#{model.institute}
-                        and model_file.model=#{model.model}
-                        and model_file.experiment=#{model.experiment}
-                        and model_file.frequency=#{model.frequency}
-                        and model_file.modeling_realm=#{model.modelingRealm}
-                        and model_file.ensemble_member=#{model.ensembleMember}
-                        and model_file.variable_name=#{model.variableName}
-                    )
-                </foreach>
+				<include refid="modelList"/>
             </if>
             <include refid="ensureTemporal" />
         ) t
@@ -120,13 +120,7 @@
     <sql id="modelList">
         <foreach collection="modelList" item="model" open="(" separator=" or " close=")">
             (
-            model_file.institute=#{model.institute}
-            and model_file.model=#{model.model}
-            and model_file.experiment=#{model.experiment}
-            and model_file.frequency=#{model.frequency}
-            and model_file.modeling_realm=#{model.modelingRealm}
-            and model_file.ensemble_member=#{model.ensembleMember}
-            and model_file.variable_name=#{model.variableName}
+                <include refid="matchModel"/>
             )
         </foreach>
     </sql>
@@ -347,13 +341,7 @@
 			full_path
 		from model_file
 		where
-            model_file.institute=#{model.institute}
-            and model_file.model=#{model.model}
-            and model_file.experiment=#{model.experiment}
-            and model_file.frequency=#{model.frequency}
-            and model_file.modeling_realm=#{model.modelingRealm}
-            and model_file.ensemble_member=#{model.ensembleMember}
-            and model_file.variable_name=#{model.variableName}
+            <include refid="matchModel"/>
 			<include refid="ensureTemporal"/>
 	</select>
 	

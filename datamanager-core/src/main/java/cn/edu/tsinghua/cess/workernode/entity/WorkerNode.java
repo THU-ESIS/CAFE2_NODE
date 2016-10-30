@@ -64,7 +64,7 @@ public class WorkerNode implements RemoteServer {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.intValue();
+        return id == null ? -1 : id.intValue();
     }
 
     @Override

@@ -15,6 +15,10 @@ import cn.edu.tsinghua.cess.task.entity.dto.TaskSubmition;
 import cn.edu.tsinghua.cess.task.service.TaskExecutionService;
 import cn.edu.tsinghua.cess.task.service.TaskSubmitionService;
 import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +37,12 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 	@Autowired ModelFileDao modelFileDao;
 	@Autowired RemoteServiceFactory remoteServiceFactory;
 
+	ObjectMapper objectMapper; {
+		objectMapper = new ObjectMapper();
+		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	}
+
 
 	private ModelFileQueryService getCentralModelFileQueryService() {
 		Deployment deployment = deploymentService.get();
@@ -50,14 +60,12 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 	}
 
 	/**
-	 * will assure that duplicat model accross multiple nodes will only be accounted once with arbitrary random node
+	 * will assure that duplicated model across multiple nodes will only be accounted only once.
 	 * @param relations
 	 * @return
 	 */
 	private Map<WorkerNode, Set<Model>> classify(ModelNodeRelation[] relations) {
-
 		Set<Model> containedModels = new HashSet<Model>();
-
 
 		Map<WorkerNode, Set<Model>> result = new HashMap<WorkerNode, Set<Model>>();
 
@@ -92,11 +100,22 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 				submition.getModels()
 		));
 
+		log.info("actual submition models=" + toJsonString(actualSubmitionModels));
+
 	    TaskSubmition actualSubmition = new TaskSubmition();
         actualSubmition.setNclScript(submition.getNclScript());
 		actualSubmition.setModels(actualSubmitionModels);
 
 		return actualSubmition;
+	}
+
+	private String toJsonString(Object object) {
+		try {
+			return objectMapper.writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+            log.error("error formatting json", e);
+			return String.valueOf(object);
+		}
 	}
 
 	@Override
@@ -109,7 +128,12 @@ public class WorkerNodeSubmitionServiceImpl implements TaskSubmitionService {
 		// this central modelfile query service will filter out duplicated models
 		// only remaining one single model for the duplicating ones
 		ModelNodeRelation[] modelNodeRelations = getCentralModelFileQueryService().queryRelatedNodes(submition.getModels().toArray(new Model[0]));
+
+		log.info("modelNodeRelation=" + toJsonString(modelNodeRelations));
+
 		Map<WorkerNode, Set<Model>> workerModelSetMap = this.classify(modelNodeRelations);
+
+		log.info("classified modelNode relation=" + toJsonString(workerModelSetMap));
 
 
 		Task task = new Task();
