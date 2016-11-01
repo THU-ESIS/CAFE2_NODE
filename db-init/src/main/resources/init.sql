@@ -1,6 +1,3 @@
-
-// TODO: add create_time
-
 DROP TABLE IF EXISTS model_file;
 CREATE TABLE
   model_file
@@ -8,13 +5,13 @@ CREATE TABLE
   id                    INT(10)       NOT NULL AUTO_INCREMENT,
   node_id               INT(10),
   full_path             VARCHAR(1024) NOT NULL,
-  institute             VARCHAR(1024) NOT NULL,
-  model                 VARCHAR(1024) NOT NULL,
-  experiment            VARCHAR(1024) NOT NULL,
-  frequency             VARCHAR(1024) NOT NULL,
-  modeling_realm        VARCHAR(1024) NOT NULL,
-  ensemble_member       VARCHAR(1024) NOT NULL,
-  variable_name         VARCHAR(1024) NOT NULL,
+  institute             VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  model                 VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  experiment            VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  frequency             VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  modeling_realm        VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  ensemble_member       VARCHAR(1024) COLLATE utf8_bin NOT NULL,
+  variable_name         VARCHAR(1024) COLLATE utf8_bin NOT NULL,
   mip_table             VARCHAR(1024) NOT NULL,
   temporal_start_year   VARCHAR(16),
   temporal_start_month  VARCHAR(16),
