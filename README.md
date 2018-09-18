@@ -7,7 +7,12 @@ To see detailed information about CAFE, please check the [wiki page](https://git
 sudo apt-get install mysql-server mysql-client  #For Ubuntu user
 sudo service mysql start #open mysql service
 ``` 
-`Note`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row starts with `bind-address`
+`Note`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row starts with `bind-address`.
+
+Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in searching climate models. To disable this in sql mode, you can add `sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"`
+in `/etc/mysql/my.cnf` then restart mysql and tomcat service.
+
+
 #### 2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
 sudo apt-get install tomcat7     #For Ubuntu user
