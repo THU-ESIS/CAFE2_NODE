@@ -69,7 +69,7 @@ You have to create a user for your database system using mySQL root account, obt
 e.g. CREATE USER 'username'@'%' IDENTIFIED BY 'password'; 
 ```
 `Note`: To ensure the database can be connected using ip and from remote servers, '%' should be used.
-###2.	Creating a database. 
+### 2.	Creating a database. 
 Create a database then grand privileges to the database user {`jdbc.user`} created in `step 1` and obtain the database name {`jdbc.database`}
 ```Bash 
 e.g. # if the name of your database called CAFENODE, then jdbc.database=CAFENODE
