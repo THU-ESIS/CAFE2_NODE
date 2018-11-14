@@ -1,5 +1,6 @@
 # CAFE_NODE
 To see detailed information about CAFE, please check the [wiki page](https://github.com/THU-EarthInformationScienceLab/CAFE_NODE/wiki).
+You can also see check this [paper](https://doi.org/10.1016/j.envsoft.2018.09.007) describing the whole system.
 ## Before your Installation
 `Notice`: This package should be installed on the server-side. Data archives need to be read from this server. As the function of this package is limited by some other external applications, a Linux environment is required. To ensure the node work correctly, following applications have to be installed before your installation:       
 #### 1.	MySQL Server and Client (http://dev.mysql.com/downloads/mysql/5.6.html#downloads )     
@@ -104,6 +105,12 @@ You could rename the `.war` package and place it under `tomcat/webapps`. Then yo
 `Note`:{host} is the ip address of the node, and {port} is tomcat port. You can also use tomcat management webpage to deploy the package.                        
 ### 6.  Choosing deployment mode.
 You could access this web page（`http://{host}:{port}/{war package name}/web/deployment`） to choose deployment mode. Generally, in a complete infrastructure, there are one central node and several worker nodes, all the worker nodes are peer-to-peer.
-`Note`:the root path of your Node is `/{war package name}`, for example, if your war name is `datamanager-worker.war`, the root path will be `datamanager-worker`. The `{port}` is the port of Tomcat.                 
+`Note`:the root path of your Node is `/{war package name}`, for example, if your war name is `datamanager-worker.war`, the root path will be `datamanager-worker`. The `{port}` is the port of Tomcat. Here you can also deploy the worker node as a local node, (then configure server accesss in cafe_portal configuration, change ip address to localhost)                
 ### 7.  Data indexing.      
-For worker nodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, input the root folder of the data archive mounted on the node server and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely.
+For worker nodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, input the root folder of the data archive mounted on the node server and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely. You will be redirected to `http://{your-workernode}/datamanager-web-worker/web/parser/run` and see `{"success":true}` if successful.
+     - climate data format
+          1. According to the paper, CMIP5 model data that stored in NetCDF format,  follow the [Climate and Forecast (CF) metadata  conventions](http://cfconventions.org/) and follow the rules defined in the [CMIP5 model output requirements](https://www.google.com.hk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwiah5vwj9TeAhWLWLwKHfAHB1AQFjAAegQIBRAC&url=https%3A%2F%2Fcmip.llnl.gov%2Fcmip5%2Fdocs%2FCMIP5_output_metadata_requirements.pdf&usg=AOvVaw2JcwMh6R5TYVUeNMNwTx5N) have been successfully tested.
+          2. An example of data path configuration:
+          ![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png)
+          In this case, you can configure the path as `/CMOR/node2`
+             
