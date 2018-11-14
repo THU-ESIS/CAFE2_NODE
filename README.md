@@ -115,7 +115,7 @@ For worker nodes, you could access the web page `http://{host}: {port}/{war pack
           
           2. An example of data path configuration:
           
-          ![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png)
+ ![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png?raw=true)
           
           In this case, you can configure the path as `/CMOR/node2`
              
