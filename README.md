@@ -14,15 +14,7 @@ sudo service mysql start #open mysql service
 Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in searching climate models. To disable this in sql mode, you can add `sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"`
 in `/etc/mysql/my.cnf` then restart mysql and tomcat service.
 
-
-#### 2.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
-```Bash 
-sudo apt-get install tomcat7     #For Ubuntu user
-After installing Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
-and create a tomcat user by modifying the file "tomcat/conf/tomcat-users.xml"
-```
-`Note`:You can refer to (http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html#Configuring_Manager_Application_Access) for more details about configuring Tomcat managers.
-#### 3.	JDK1.7 (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+#### 2.	JDK (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 `Warning`: You may have to configure environment variables as below.
 ```Bash
 ##java
@@ -31,6 +23,15 @@ export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
 ```
+
+#### 3.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
+```Bash 
+sudo apt-get install tomcat7     #For Ubuntu user
+After installing Tomcat, you have to start tomcat by "sh tomcat/bin/startup.sh"
+and create a tomcat user by modifying the file "tomcat/conf/tomcat-users.xml"
+```
+`Note`:You can refer to (http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html#Configuring_Manager_Application_Access) for more details about configuring Tomcat managers.
+
 #### 4.	NCL 6.1.2 or higher version (https://www.earthsystemgrid.org/dataset/ncl.630.html  )    
 `Warning`: To ensure the node work correctly, we highly recommend you to install NCL in the default directory /usr/local/ncl and set the environment variable as NCARG_ROOT=/usr/local/ncl    
 #### 5.	CDO 1.6.4 or higher version (Climate Data Operator, https://code.zmaw.de/projects/cdo/ )    
