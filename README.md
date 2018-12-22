@@ -11,7 +11,10 @@ sudo service mysql start #open mysql service
 ``` 
 `Note`: To ensure the correct connection to the database, you may have to modify the file `/etc/mysql/my.cnf` and annotate the row starts with `bind-address`.
 
-Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in filtering data in Home>>Search section. To disable this in sql mode, you can add `sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"`
+Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in filtering data in Home>>Search section. To disable this in sql mode, you can add
+```
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+```
 in `/etc/mysql/my.cnf` then restart mysql and tomcat service.
 
 #### 2.	JDK
@@ -111,11 +114,8 @@ You could access this web page（`http://{host}:{port}/{war package name}/web/de
 `Note`:the root path of your Node is `/{war package name}`, for example, if your war name is `datamanager-worker.war`, the root path will be `datamanager-worker`. The `{port}` is the port of Tomcat. Here you can also deploy the worker node as a local node, (then configure server accesss in cafe_portal configuration, change ip address to localhost)                
 ### 7.  Data indexing.      
 For worker nodes, you could access the web page `http://{host}: {port}/{war package name}/web/parser`, input the root folder of the data archive mounted on the node server and submit the form from the webpage, the data in this node will then be indexed automatically. The information of the data will be synchronously updated locally and remotely. You will be redirected to `http://{your-workernode}/datamanager-web-worker/web/parser/run` and see `{"success":true}` if successful.
-     - climate data format
-     
-          1. According to the paper, CMIP5 model data that stored in NetCDF format,  follow the [Climate and Forecast (CF) metadata  conventions](http://cfconventions.org/) and follow the rules defined in the [CMIP5 model output requirements](https://www.google.com.hk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwiah5vwj9TeAhWLWLwKHfAHB1AQFjAAegQIBRAC&url=https%3A%2F%2Fcmip.llnl.gov%2Fcmip5%2Fdocs%2FCMIP5_output_metadata_requirements.pdf&usg=AOvVaw2JcwMh6R5TYVUeNMNwTx5N) have been successfully tested.
-          
-          2. An example of data path configuration:
+
+      An example of data path configuration:
           
  ![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png?raw=true)
           
