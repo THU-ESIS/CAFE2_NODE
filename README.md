@@ -15,7 +15,7 @@ Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in filter
 ```
 sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 ```
-in `/etc/mysql/my.cnf` then restart mysql and tomcat service.
+under [mysqld] part in `/etc/mysql/my.cnf` (or the first .cnf mysql uses) then restart mysql and tomcat service.
 
 #### 2.	JDK
 `Warning`: You may have to configure environment variables as below.
@@ -117,7 +117,7 @@ For worker nodes, you could access the web page `http://{host}: {port}/{war pack
 
       An example of data path configuration:
           
- ![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png?raw=true)
+![image](https://github.com/Theropod/CAFE_NODE/blob/master/parse-data-configuration.png?raw=true)
           
-          In this case, you can configure the path as `/CMOR/node2`
+     In this case, you can configure the path as `/CMOR/node2`
              
