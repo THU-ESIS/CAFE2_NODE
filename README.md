@@ -14,7 +14,7 @@ sudo service mysql start #open mysql service
 Mysql 5.7 added ONLY_FULL_GROUP_BY in sql mode, this may cause failure in searching climate models. To disable this in sql mode, you can add `sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"`
 in `/etc/mysql/my.cnf` then restart mysql and tomcat service.
 
-#### 2.	JDK (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+#### 2.	JDK
 `Warning`: You may have to configure environment variables as below.
 ```Bash
 ##java
@@ -23,7 +23,7 @@ export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
 ```
-(CAFE_NODE uses javax.annotation, which seemes to be deprecated in jdk9 and 11, so don't use high version jdks)
+(CAFE_NODE uses javax.annotation, which seemes to be deprecated in jdk9 and 11, and maven has announced to discontinue to support TLS v1.1 in java 1.7. So java 1.8 is good to go now)
 
 #### 3.	Tomcat 7 (http://tomcat.apache.org/download-70.cgi )      
 ```Bash 
