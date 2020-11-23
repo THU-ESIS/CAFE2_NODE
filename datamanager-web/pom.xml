@@ -9,8 +9,7 @@
 	</parent>
 	<artifactId>datamanager-web</artifactId>
 	<packaging>war</packaging>
-	<name>datamanager-web Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>datamanager-web</name>
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -58,6 +57,11 @@
 		<dependency>
 			<groupId>cn.edu.tsinghua.cess</groupId>
 			<artifactId>config</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.edu.tsinghua.cess</groupId>
+			<artifactId>tsing-cafe-service</artifactId>
 			<version>1.1.0</version>
 		</dependency>
 	</dependencies>

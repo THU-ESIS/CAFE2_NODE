@@ -11,5 +11,9 @@
     <a href="deployment">View Deployment Status</a>
 </h5>
 
+<h5>
+    <a href="parser">Data Parser</a>
+</h5>
+
 </body>
 </html>

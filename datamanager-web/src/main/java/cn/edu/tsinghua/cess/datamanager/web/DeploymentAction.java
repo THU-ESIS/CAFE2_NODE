@@ -1,7 +1,11 @@
 package cn.edu.tsinghua.cess.datamanager.web;
 
-import java.util.List;
-
+import cn.edu.tsinghua.cess.deployment.entity.DeployMode;
+import cn.edu.tsinghua.cess.deployment.entity.Deployment;
+import cn.edu.tsinghua.cess.deployment.service.DeploymentService;
+import cn.edu.tsinghua.cess.deployment.service.NotYetDeployedException;
+import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
+import cn.edu.tsinghua.cess.workernode.service.WorkerNodeManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.edu.tsinghua.cess.deployment.entity.DeployMode;
-import cn.edu.tsinghua.cess.deployment.entity.Deployment;
-import cn.edu.tsinghua.cess.deployment.service.DeploymentService;
-import cn.edu.tsinghua.cess.deployment.service.NotYetDeployedException;
-import cn.edu.tsinghua.cess.workernode.entity.WorkerNode;
-import cn.edu.tsinghua.cess.workernode.service.WorkerNodeManageService;
+import java.util.List;
 
 @RequestMapping("/deployment")
 @Controller
@@ -22,7 +21,7 @@ public class DeploymentAction {
 	
 	@Autowired DeploymentService deploymentService;
 	@Autowired WorkerNodeManageService workerNodeManageService;
-	
+
 	@RequestMapping(value = "/deploy", method = RequestMethod.POST)
 	public String deploy(
 				@RequestParam("mode") String mode,
@@ -68,5 +67,6 @@ public class DeploymentAction {
             return new ModelAndView("deployment/add");
         }
 	}
+
 
 }
