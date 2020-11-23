@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.tsing.hua.cafe.dal.dao.DeploymentMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.tsing.hua.cafe.dal.domain.Deployment" >
+    <result column="mode" property="mode" jdbcType="VARCHAR" />
+    <result column="node_id" property="nodeId" jdbcType="INTEGER" />
+    <result column="node_name" property="nodeName" jdbcType="VARCHAR" />
+    <result column="node_ip" property="nodeIp" jdbcType="VARCHAR" />
+    <result column="node_port" property="nodePort" jdbcType="INTEGER" />
+    <result column="root_path" property="rootPath" jdbcType="VARCHAR" />
+    <result column="central_node_ip" property="centralNodeIp" jdbcType="VARCHAR" />
+    <result column="central_node_port" property="centralNodePort" jdbcType="INTEGER" />
+    <result column="central_node_root_path" property="centralNodeRootPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.edu.tsing.hua.cafe.dal.domain.Deployment" >
+    insert into deployment (mode, node_id, node_name, 
+      node_ip, node_port, root_path, 
+      central_node_ip, central_node_port, central_node_root_path
+      )
+    values (#{mode,jdbcType=VARCHAR}, #{nodeId,jdbcType=INTEGER}, #{nodeName,jdbcType=VARCHAR}, 
+      #{nodeIp,jdbcType=VARCHAR}, #{nodePort,jdbcType=INTEGER}, #{rootPath,jdbcType=VARCHAR}, 
+      #{centralNodeIp,jdbcType=VARCHAR}, #{centralNodePort,jdbcType=INTEGER}, #{centralNodeRootPath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.tsing.hua.cafe.dal.domain.Deployment" >
+    insert into deployment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mode != null" >
+        mode,
+      </if>
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="nodeName != null" >
+        node_name,
+      </if>
+      <if test="nodeIp != null" >
+        node_ip,
+      </if>
+      <if test="nodePort != null" >
+        node_port,
+      </if>
+      <if test="rootPath != null" >
+        root_path,
+      </if>
+      <if test="centralNodeIp != null" >
+        central_node_ip,
+      </if>
+      <if test="centralNodePort != null" >
+        central_node_port,
+      </if>
+      <if test="centralNodeRootPath != null" >
+        central_node_root_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mode != null" >
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=INTEGER},
+      </if>
+      <if test="nodeName != null" >
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeIp != null" >
+        #{nodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="nodePort != null" >
+        #{nodePort,jdbcType=INTEGER},
+      </if>
+      <if test="rootPath != null" >
+        #{rootPath,jdbcType=VARCHAR},
+      </if>
+      <if test="centralNodeIp != null" >
+        #{centralNodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="centralNodePort != null" >
+        #{centralNodePort,jdbcType=INTEGER},
+      </if>
+      <if test="centralNodeRootPath != null" >
+        #{centralNodeRootPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

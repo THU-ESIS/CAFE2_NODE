@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.edu.tsinghua.cess.modelfile.dao.ModelFileDao;
 import cn.edu.tsinghua.cess.modelfile.entity.ModelFile;
 
+
 @Component("databaseHandler")
 public class DatabaseHandler extends AbstractBatchHandler {
 	
