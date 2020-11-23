@@ -11,6 +11,7 @@ import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFields;
 import cn.edu.tsinghua.cess.modelfile.entity.ModelFileFilter;
 import cn.edu.tsinghua.cess.modelfile.service.ModelFileQueryService;
 import cn.edu.tsinghua.cess.workernode.service.WorkerNodeManageService;
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
@@ -84,7 +85,7 @@ public class ModelFileQueryServiceImpl implements ModelFileQueryService {
 		
 		BeanWrapper filterWrapper = PropertyAccessorFactory.forBeanPropertyAccess(filter == null ? new ModelFileFilter() : filter);
 		BeanWrapper remainingFilterWrapper = PropertyAccessorFactory.forBeanPropertyAccess(remainingFilter);
-		
+System.out.println(JSON.toJSONString(ModelFileFields.values()));
 		for (ModelFileFields f : ModelFileFields.values()) {
 			String field = f.getField();
 			String column = f.getColumn();

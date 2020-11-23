@@ -1,5 +1,6 @@
 package cn.edu.tsinghua.cess.datamanager.api.v1;
 
+import cn.edu.tsing.hua.cafe.service.ModelFileJust;
 import cn.edu.tsinghua.cess.component.remote.RemoteServiceFactory;
 import cn.edu.tsinghua.cess.datamanager.api.ApiResult;
 import cn.edu.tsinghua.cess.datamanager.api.ApiUtil;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ public class ModelFileQueryApi {
 	@Autowired ModelFileQueryService service;
 	@Autowired DeploymentService deploymentService;
 	@Autowired RemoteServiceFactory remoteServiceFactory;
+
 
 	/**
 	 * serve both client request and server remote request
@@ -81,8 +84,6 @@ public class ModelFileQueryApi {
 		});
 	}
 
-
-	
 	private ModelFileFilter createFilter(
 			List<String> institute,
 			List<String> model,
@@ -107,5 +108,6 @@ public class ModelFileQueryApi {
 		
 		return filter;
 	}
-	
+
+
 }

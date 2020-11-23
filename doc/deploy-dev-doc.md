@@ -1,7 +1,14 @@
-#### 概述  
-
+### 开发中的一些记录
+#### 2019年更新的一些内容
+- 在datamanager-web/.../api.v1/ModelFileQueryApi中加入了/modelfile/query接口，用来分页、根据发送条件获取所有符合的modelfile
+- 在datamanager-web/.../web/MainAction中加入三个使用modelfilejust的获取文件列表接口，但前端目前没有使用这些接口
+- 加入tsing-cafe-service和tsing-cafe-dal作为MainAction接口的支撑
+#### 有关数据库等的配置
+- config/src/.../baseResources/applicationContext.xml中定义了jdbc配置项，同级的template下由jdbc.properties定义了默认值，而maven打包时通过输入参数定义数据库连接和用户密码（优先级更高）
+- 而tsing-cafe-dal模块里面的各个类和接口由mybatis generator根据表结构生成，在maven package的时候需要读取本模块下面的config里面的数据库信息(以及其他hard coded的数据库信息)，覆盖原来自动生成的类
+---
+### 部署概述  
 > 首先需要阐明的一个问题是：此系统的服务器节点有两种类型：`Central Node`与`Worker Node`。无论是哪种类型的节点，它们的`源代码``war包内容（除了数据库配置部分）``数据库表结构`在初次部署至tomcat之初都是一样的。在初次部署至tomcat后的`选择部署类型(Central Node还是Worker Node)`后，它们才有了中央节点与子节点的区别。  
-
 #### 从零部署的步骤：  
 1. 准备数据库。安装mysql、创建用户名 ，产生`数据库ip地址 (jdbc.host)` `数据库端口 (jdbc.port)` `数据库用户名 (jdbc.user)` `数据库密码 (jdbc.password)`  
 2. 创建数据库。创建一个数据库，授权给步骤一中的`jdbc.user`，产生`数据库名 (jdbc.database)`  

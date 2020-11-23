@@ -28,22 +28,14 @@ class ParserContext {
 	}
 
 	public void fillPathProperties(Model modelEntity) {
-		String variableName;
-		
-		if (directoryStack.size() == 12) {
-			variableName = directoryStack.get(12);
-		} else if (directoryStack.size() == 10) {
-			variableName = directoryStack.get(8);
-		} else {
-			throw new IllegalArgumentException();
-		}
-		
+
 		String institute = directoryStack.get(3);
 		String model = directoryStack.get(4);
 		String experiment = directoryStack.get(5);
-		String frequency = directoryStack.get(6);
-		String modelingRealm = directoryStack.get(7);
-		String ensembleMember = directoryStack.get(9);
+		String frequency = directoryStack.get(9);
+		String modelingRealm = directoryStack.get(10);
+		String variableName = directoryStack.get(8);
+		String ensembleMember = directoryStack.get(6);
 		
 		
 		modelEntity.setInstitute(institute);
@@ -61,7 +53,7 @@ class ParserContext {
 	 * @return
 	 */
 	public boolean conformWithPattern() {
-		if (directoryStack.size() == 10 || directoryStack.size() == 12) {
+		if ( directoryStack.size() == 11) {
 			return true;
 		}
 		return false;
