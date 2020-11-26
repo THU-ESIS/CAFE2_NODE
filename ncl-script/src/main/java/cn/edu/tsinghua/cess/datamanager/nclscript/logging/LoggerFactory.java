@@ -1,6 +1,5 @@
 package cn.edu.tsinghua.cess.datamanager.nclscript.logging;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -55,7 +54,7 @@ public class LoggerFactory {
                 @Override
                 public void error(Object message, Throwable ex) {
                     try {
-                        clazz.getMethod("error", new Class<?>[] { Object.class, Throwable.class }).invoke(logger, new Object[] { message, ex });
+                        clazz.getMethod("error", new Class<?>[]{Object.class, Throwable.class}).invoke(logger, new Object[]{message, ex});
                     } catch (Exception e) {
                         stdoutLogger.error(message, ex);
                     }

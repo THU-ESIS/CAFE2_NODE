@@ -10,7 +10,7 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SubTaskResult implements ModelProvider {
-	
+
     private Model model;
     private SubTaskStatus status;
     private Integer progress;

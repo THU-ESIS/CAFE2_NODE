@@ -13,26 +13,33 @@ public class SubTaskResultFile {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public Integer getSubTaskId() {
-		return subTaskId;
-	}
-	public void setSubTaskId(Integer subTaskId) {
-		this.subTaskId = subTaskId;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getPath() {
-		return path;
-	}
-	public void setPath(String path) {
-		this.path = path;
-	}
+        return subTaskId;
+    }
+
+    public void setSubTaskId(Integer subTaskId) {
+        this.subTaskId = subTaskId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
 }

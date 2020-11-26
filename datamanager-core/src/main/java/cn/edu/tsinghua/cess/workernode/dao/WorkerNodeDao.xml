@@ -4,7 +4,7 @@
 <mapper namespace="cn.edu.tsinghua.cess.workernode.dao.WorkerNodeDao">
 
     <insert id="insert" parameterType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode"
-        useGeneratedKeys="true" keyProperty="id">
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO worker_node
             (name, ip, port, root_path)
         VALUES
@@ -26,7 +26,7 @@
         DELETE FROM worker_node
         WHERE id=#{id}
     </delete>
-    
+
     <select id="listAll" resultType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
         SELECT
             id AS id,

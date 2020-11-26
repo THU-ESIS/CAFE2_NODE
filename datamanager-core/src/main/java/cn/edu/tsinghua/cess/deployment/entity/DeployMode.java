@@ -2,8 +2,9 @@ package cn.edu.tsinghua.cess.deployment.entity;
 
 /**
  * Three deploy mode are defined in this enum class.
+ * <p>
+ * -
  *
- *  -
  * @author kurtyan777@gmail.com
  */
 public enum DeployMode {

@@ -3,14 +3,15 @@
  */
 
 package cn.edu.tsinghua.cess.datamanager.nclscript;
+
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import org.apache.log4j.Logger;
 
-public class StreamReader extends Thread
-{
+public class StreamReader extends Thread {
 
     InputStream is;
 
@@ -18,34 +19,26 @@ public class StreamReader extends Thread
 
     Logger logger;
 
-    StreamReader(InputStream is, String type,Logger logger)
-    {
+    StreamReader(InputStream is, String type, Logger logger) {
         this.is = is;
         this.type = type;
-        this.logger=logger;
+        this.logger = logger;
     }
 
-    public void run()
-    {
+    public void run() {
         InputStreamReader isr = null;
         BufferedReader br = null;
-        try
-        {
+        try {
             isr = new InputStreamReader(is);
             br = new BufferedReader(isr);
             String line = null;
-            while ((line = br.readLine()) != null)
-            {
+            while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                if (logger!=null) logger.info(line);
+                if (logger != null) logger.info(line);
             }
-        }
-        catch (IOException ioe)
-        {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             close(isr, br);
         }
 //        BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -69,27 +62,18 @@ public class StreamReader extends Thread
 //        }
     }
 
-    public void close(InputStreamReader isr, BufferedReader br)
-    {
-        if (null != isr)
-        {
-            try
-            {
+    public void close(InputStreamReader isr, BufferedReader br) {
+        if (null != isr) {
+            try {
                 isr.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 isr = null;
             }
         }
-        if (null != br)
-        {
-            try
-            {
+        if (null != br) {
+            try {
                 br.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 br = null;
             }
         }

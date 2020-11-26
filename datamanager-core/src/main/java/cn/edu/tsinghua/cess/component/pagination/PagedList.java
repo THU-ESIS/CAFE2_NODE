@@ -4,20 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 
 public class PagedList<T> extends Paged implements Iterable<T> {
-	
-	private List<T> list;
 
-	public List<T> getList() {
-		return list;
-	}
+    private List<T> list;
 
-	public void setList(List<T> list) {
-		this.list = list;
-	}
+    public List<T> getList() {
+        return list;
+    }
 
-	@Override
-	public Iterator<T> iterator() {
-		return list.iterator();
-	}
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return list.iterator();
+    }
 
 }

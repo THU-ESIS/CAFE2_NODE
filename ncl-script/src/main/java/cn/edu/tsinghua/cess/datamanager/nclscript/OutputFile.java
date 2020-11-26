@@ -9,7 +9,6 @@ package cn.edu.tsinghua.cess.datamanager.nclscript;
 import java.io.File;
 
 /**
- *
  * @author ericxuhao
  */
 public class OutputFile {
@@ -18,12 +17,15 @@ public class OutputFile {
     File[] outputFile;
     String[] outputArgName;
     int count;
-    OutputFile(){}
-    OutputFile(String outputType,String[] outputAlias,String[] outputArgName,int count){
-        this.outputType=outputType;   //输出数据类型
-        this.outputAlias=outputAlias;  //输出数据文件后缀名
-        this.count=count; //输出文件个数
-        this.outputArgName=outputArgName;  //NCL脚本中输出文件夹的变量名，如nc_name,fig_name
-        this.outputFile=new File[this.count];
+
+    OutputFile() {
+    }
+
+    OutputFile(String outputType, String[] outputAlias, String[] outputArgName, int count) {
+        this.outputType = outputType;   //输出数据类型
+        this.outputAlias = outputAlias;  //输出数据文件后缀名
+        this.count = count; //输出文件个数
+        this.outputArgName = outputArgName;  //NCL脚本中输出文件夹的变量名，如nc_name,fig_name
+        this.outputFile = new File[this.count];
     }
 }

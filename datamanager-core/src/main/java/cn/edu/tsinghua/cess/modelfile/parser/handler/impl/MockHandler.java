@@ -5,14 +5,14 @@ import cn.edu.tsinghua.cess.modelfile.parser.ModelFileHandler;
 
 public class MockHandler implements ModelFileHandler {
 
-	@Override
-	public void handle(ModelFile modelFile) {
-		System.out.println(modelFile.getFullPath());
-	}
+    @Override
+    public void handle(ModelFile modelFile) {
+        System.out.println(modelFile.getFullPath());
+    }
 
-	@Override
-	public void flush() {
-		// do nothing
-	}
+    @Override
+    public void flush() {
+        // do nothing
+    }
 
 }

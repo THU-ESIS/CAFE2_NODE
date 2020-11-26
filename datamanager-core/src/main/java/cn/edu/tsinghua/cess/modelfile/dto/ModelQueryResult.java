@@ -20,20 +20,20 @@ public class ModelQueryResult {
         this.filter = filter;
     }
 
-    public void setModelList(PagedList<Model> modelList) {
-        this.modelList = modelList;
-    }
-
-    public void setFilter(ModelFileFilter filter) {
-        this.filter = filter;
-    }
-
     public PagedList<Model> getModelList() {
         return modelList;
     }
 
+    public void setModelList(PagedList<Model> modelList) {
+        this.modelList = modelList;
+    }
+
     public ModelFileFilter getFilter() {
         return filter;
+    }
+
+    public void setFilter(ModelFileFilter filter) {
+        this.filter = filter;
     }
 
 }

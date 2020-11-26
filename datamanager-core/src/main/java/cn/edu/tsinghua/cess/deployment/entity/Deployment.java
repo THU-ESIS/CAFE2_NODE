@@ -18,16 +18,16 @@ public class Deployment {
     private String centralNodeIp;
     private Integer centralNodePort;
     private String centralNodeRootPath;
-    
+
     public Integer getNodeId() {
-		return nodeId;
-	}
+        return nodeId;
+    }
 
-	public void setNodeId(Integer nodeId) {
-		this.nodeId = nodeId;
-	}
+    public void setNodeId(Integer nodeId) {
+        this.nodeId = nodeId;
+    }
 
-	public DeployMode getMode() {
+    public DeployMode getMode() {
         return mode;
     }
 
@@ -75,61 +75,61 @@ public class Deployment {
         this.centralNodeIp = centralNodeIp;
     }
 
-	public Integer getCentralNodePort() {
-		return centralNodePort;
-	}
+    public Integer getCentralNodePort() {
+        return centralNodePort;
+    }
 
-	public void setCentralNodePort(Integer centralNodePort) {
-		this.centralNodePort = centralNodePort;
-	}
+    public void setCentralNodePort(Integer centralNodePort) {
+        this.centralNodePort = centralNodePort;
+    }
 
-	public String getCentralNodeRootPath() {
-		return centralNodeRootPath;
-	}
+    public String getCentralNodeRootPath() {
+        return centralNodeRootPath;
+    }
 
-	public void setCentralNodeRootPath(String centralNodeRootPath) {
-		this.centralNodeRootPath = centralNodeRootPath;
-	}
-	
-	public RemoteServer getLocalServer() {
-		return new RemoteServer() {
-			
-			@Override
-			public String getRootPath() {
-				return rootPath;
-			}
-			
-			@Override
-			public Integer getPort() {
-				return nodePort;
-			}
-			
-			@Override
-			public String getAddress() {
-				return nodeIp;
-			}
-		};
-		
-	}
-	
-	public RemoteServer getCentralServer() {
-		return new RemoteServer() {
-			
-			@Override
-			public String getRootPath() {
-				return centralNodeRootPath;
-			}
-			
-			@Override
-			public Integer getPort() {
-				return centralNodePort;
-			}
-			
-			@Override
-			public String getAddress() {
-				return centralNodeIp;
-			}
-		};
-	}
-    
+    public void setCentralNodeRootPath(String centralNodeRootPath) {
+        this.centralNodeRootPath = centralNodeRootPath;
+    }
+
+    public RemoteServer getLocalServer() {
+        return new RemoteServer() {
+
+            @Override
+            public String getRootPath() {
+                return rootPath;
+            }
+
+            @Override
+            public Integer getPort() {
+                return nodePort;
+            }
+
+            @Override
+            public String getAddress() {
+                return nodeIp;
+            }
+        };
+
+    }
+
+    public RemoteServer getCentralServer() {
+        return new RemoteServer() {
+
+            @Override
+            public String getRootPath() {
+                return centralNodeRootPath;
+            }
+
+            @Override
+            public Integer getPort() {
+                return centralNodePort;
+            }
+
+            @Override
+            public String getAddress() {
+                return centralNodeIp;
+            }
+        };
+    }
+
 }

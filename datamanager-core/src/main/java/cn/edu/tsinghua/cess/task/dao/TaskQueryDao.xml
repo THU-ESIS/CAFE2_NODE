@@ -13,44 +13,44 @@
     </select>
 
     <resultMap id="subTaskListEntry" type="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
-        <id column="sub_task_id" property="subTaskId" />
-        <result column="task_id" property="taskId" />
-        <result column="node_id" property="nodeId" />
+        <id column="sub_task_id" property="subTaskId"/>
+        <result column="task_id" property="taskId"/>
+        <result column="node_id" property="nodeId"/>
     </resultMap>
-    
-<!--
 
-    <select id="querySubTaskList" resultMap="subTaskListEntry">
-        select
-            sl.task_id,
-            sl.sub_task_id,
-            sl.node_id,
-            wn.id,
-            wn.name,
-            wn.ip,
-            wn.port,
-            wn.root_path
-        from task_subtask_list sl
-        left join worker_node wn on sl.node_id=wn.id
-        where sl.task_id=#{uuid}
-    </select>
+    <!--
+
+        <select id="querySubTaskList" resultMap="subTaskListEntry">
+            select
+                sl.task_id,
+                sl.sub_task_id,
+                sl.node_id,
+                wn.id,
+                wn.name,
+                wn.ip,
+                wn.port,
+                wn.root_path
+            from task_subtask_list sl
+            left join worker_node wn on sl.node_id=wn.id
+            where sl.task_id=#{uuid}
+        </select>
 
 
 
-    <resultMap id="subTaskListEntry" type="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
-        <id column="sub_task_id" property="subTaskId" />
-        <result column="task_id" property="uuid" />
-        <result column="node_id" property="nodeId" />
+        <resultMap id="subTaskListEntry" type="cn.edu.tsinghua.cess.task.entity.SubTaskListEntry">
+            <id column="sub_task_id" property="subTaskId" />
+            <result column="task_id" property="uuid" />
+            <result column="node_id" property="nodeId" />
 
-        <association property="workerNode" javaType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
-            <id column="id" property="id" />
-            <result column="ip" property="ip" />
-            <result column="name" property="name" />
-            <result column="port" property="port" />
-            <result column="root_path" property="rootPath" />
-        </association>
-    </resultMap>
--->
+            <association property="workerNode" javaType="cn.edu.tsinghua.cess.workernode.entity.WorkerNode">
+                <id column="id" property="id" />
+                <result column="ip" property="ip" />
+                <result column="name" property="name" />
+                <result column="port" property="port" />
+                <result column="root_path" property="rootPath" />
+            </association>
+        </resultMap>
+    -->
 
     <select id="querySubTaskResult" resultMap="subTaskResult">
         select
@@ -84,16 +84,16 @@
     </select>
 
     <resultMap id="subTaskResult" type="cn.edu.tsinghua.cess.task.entity.SubTask">
-        <id column="sub_task_id" property="id" />
-        <result column="model" property="model" />
-        <result column="status" property="status" />
-        <result column="progress" property="progress" />
-        <result column="progress_description" property="progressDescription" />
-        <result column="failure_cause" property="failureCause" />
+        <id column="sub_task_id" property="id"/>
+        <result column="model" property="model"/>
+        <result column="status" property="status"/>
+        <result column="progress" property="progress"/>
+        <result column="progress_description" property="progressDescription"/>
+        <result column="failure_cause" property="failureCause"/>
         <collection property="resultFileList" ofType="cn.edu.tsinghua.cess.task.entity.SubTaskResultFile">
-            <id column="result_id" property="id" />
-            <result column="type" property="type" />
-            <result column="path" property="path" />
+            <id column="result_id" property="id"/>
+            <result column="type" property="type"/>
+            <result column="path" property="path"/>
         </collection>
     </resultMap>
 

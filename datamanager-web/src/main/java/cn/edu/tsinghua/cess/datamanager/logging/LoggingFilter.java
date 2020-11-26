@@ -28,15 +28,12 @@ public class LoggingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 
-
         long begin = System.currentTimeMillis();
 
         StringBuilder builder = this.buildMessage(request, "");
         log.info("begin processing request: " + builder.toString());
 
         chain.doFilter(request, response);
-
-
 
 
 //        WrappedResponseProvider responseProvider = new WrappedResponseProvider((HttpServletResponse) response, bodyLoggingSizeThreshold);

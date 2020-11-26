@@ -11,26 +11,26 @@ public class ExceptionHandler {
         ExceptionHandler.<RuntimeException>wrap(t);
         return null;
     }
-    
+
     public static <T> T unchecked(Callable<T> command) {
-    	try {
-    		return command.call();
-    	} catch (Exception e) {
-    		throw wrapAsUnchecked(e);
-		}
+        try {
+            return command.call();
+        } catch (Exception e) {
+            throw wrapAsUnchecked(e);
+        }
     }
-    
+
     public static <T> T exceptionFree(Callable<T> command) {
-    	try {
-    		return command.call();
-    	} catch (Exception e) {
-    		return null;
-		}
-    	
+        try {
+            return command.call();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
-    
+
     @SuppressWarnings("unchecked")
-	private static <T extends Throwable> void wrap(Throwable t) throws T {
+    private static <T extends Throwable> void wrap(Throwable t) throws T {
         throw (T) t;
     }
 

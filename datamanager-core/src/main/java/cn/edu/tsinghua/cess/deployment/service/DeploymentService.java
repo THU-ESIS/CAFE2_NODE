@@ -8,7 +8,7 @@ import cn.edu.tsinghua.cess.deployment.entity.Deployment;
 public interface DeploymentService {
 
     public void deploy(Deployment deployment);
-    
+
     public Deployment get();
 
 }

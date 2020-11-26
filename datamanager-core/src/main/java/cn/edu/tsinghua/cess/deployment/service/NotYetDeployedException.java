@@ -6,11 +6,11 @@ package cn.edu.tsinghua.cess.deployment.service;
 public class NotYetDeployedException extends IllegalStateException {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -496854360636131398L;
+     *
+     */
+    private static final long serialVersionUID = -496854360636131398L;
 
-	public NotYetDeployedException() {
+    public NotYetDeployedException() {
         super("this server has not been deployed yet");
     }
 

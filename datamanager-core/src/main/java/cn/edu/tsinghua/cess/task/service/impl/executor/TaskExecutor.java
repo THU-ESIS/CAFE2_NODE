@@ -1,29 +1,44 @@
 package cn.edu.tsinghua.cess.task.service.impl.executor;
 
-import java.util.concurrent.Callable;
-
-import cn.edu.tsinghua.cess.task.entity.SubTask;
-import cn.edu.tsinghua.cess.util.RequestIdBinder;
-import org.apache.log4j.Logger;
-
 import cn.edu.tsinghua.cess.datamanager.nclscript.NclScript;
 import cn.edu.tsinghua.cess.datamanager.nclscript.NclScriptContext;
 import cn.edu.tsinghua.cess.task.dao.TaskExecutionDao;
+import cn.edu.tsinghua.cess.task.entity.SubTask;
 import cn.edu.tsinghua.cess.task.entity.SubTaskStatus;
+import cn.edu.tsinghua.cess.util.RequestIdBinder;
+import org.apache.log4j.Logger;
+
+import java.util.concurrent.Callable;
 
 public class TaskExecutor implements Runnable {
 
-	private static Logger log = Logger.getLogger(TaskExecutor.class);
-	
-	private SubTask subTask;
-	private TaskExecutionDao taskExecutionDao;
-	private Callable<NclScriptContext> contextBuilder;
-	private Callable<NclScript> scriptBuilder;
+    private static Logger log = Logger.getLogger(TaskExecutor.class);
 
-	private TaskExecutor() {}
+    private SubTask subTask;
+    private TaskExecutionDao taskExecutionDao;
+    private Callable<NclScriptContext> contextBuilder;
+    private Callable<NclScript> scriptBuilder;
 
-	@Override
-	public void run() {
+    private TaskExecutor() {
+    }
+
+    public static TaskExecutor newInstance(
+            SubTask subTask,
+            TaskExecutionDao taskExecutionDao,
+            Callable<NclScriptContext> contextBuilder,
+            Callable<NclScript> scriptBuilder) {
+        TaskExecutor executor = new TaskExecutor();
+
+        executor.subTask = subTask;
+        executor.taskExecutionDao = taskExecutionDao;
+        executor.contextBuilder = contextBuilder;
+        executor.scriptBuilder = scriptBuilder;
+
+        return executor;
+    }
+
+    @Override
+    public void run() {
         try {
             RequestIdBinder.bind();
 
@@ -36,8 +51,8 @@ public class TaskExecutor implements Runnable {
 
             log.info(builder.toString());
 
-        	NclScriptContext context = contextBuilder.call();
-        	NclScript script = scriptBuilder.call();
+            NclScriptContext context = contextBuilder.call();
+            NclScript script = scriptBuilder.call();
 
             script.run(context);
             taskExecutionDao.setStatus(subTask.getId(), SubTaskStatus.finished, null);
@@ -61,20 +76,5 @@ public class TaskExecutor implements Runnable {
             RequestIdBinder.unbind();
         }
     }
-	
-	public static TaskExecutor newInstance(
-			    SubTask subTask,
-			    TaskExecutionDao taskExecutionDao,
-			    Callable<NclScriptContext> contextBuilder,
-			    Callable<NclScript> scriptBuilder) {
-		TaskExecutor executor = new TaskExecutor();
-		
-        executor.subTask = subTask;
-        executor.taskExecutionDao = taskExecutionDao;
-        executor.contextBuilder = contextBuilder;
-        executor.scriptBuilder = scriptBuilder;
-		
-        return executor;
-	}
 
 }

@@ -28,22 +28,22 @@ public abstract class AbstractBatchHandler implements ModelFileHandler {
 
     @Override
     public void flush() {
-		synchronized (list) {
-			if (list.size() > 0) {
-				this.handle(list);
-				list.clear();
-			}
-		}
+        synchronized (list) {
+            if (list.size() > 0) {
+                this.handle(list);
+                list.clear();
+            }
+        }
     }
-    
+
     public Integer getBatchSize() {
-		return batchSize;
-	}
+        return batchSize;
+    }
 
-	public void setBatchSize(Integer batchSize) {
-		this.batchSize = batchSize;
-	}
+    public void setBatchSize(Integer batchSize) {
+        this.batchSize = batchSize;
+    }
 
-	protected abstract void handle(List<ModelFile> modelFileList);
+    protected abstract void handle(List<ModelFile> modelFileList);
 
 }
