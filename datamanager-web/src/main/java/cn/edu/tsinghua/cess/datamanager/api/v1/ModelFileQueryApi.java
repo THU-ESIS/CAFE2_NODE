@@ -1,6 +1,6 @@
 package cn.edu.tsinghua.cess.datamanager.api.v1;
 
-import cn.edu.tsing.hua.cafe.service.ModelFileJust;
+// import cn.edu.tsing.hua.cafe.service.ModelFileJust;
 import cn.edu.tsinghua.cess.component.remote.RemoteServiceFactory;
 import cn.edu.tsinghua.cess.datamanager.api.ApiResult;
 import cn.edu.tsinghua.cess.datamanager.api.ApiUtil;
