@@ -131,6 +131,7 @@
 		insert into model_file (
 			node_id,
 			full_path,
+			datasource_type,
 			institute,
 			model,
 			experiment,
@@ -139,6 +140,7 @@
 			ensemble_member,
 			variable_name,
 			mip_table,
+			dataset_version,
 			temporal_start_year,
 			temporal_start_month,
 			temporal_start_day,
@@ -149,13 +151,15 @@
 			temporal_end_day,
 			temporal_end_hour,
 			temporal_end_minute,
-			geographical_info
+			geographical_info,
+			grid_label
 		)
 		values
 		<foreach collection="list" item="item" separator=", ">
 			(
 				#{item.nodeId},
 				#{item.fullPath},
+				#{item.datasourceType},
 				#{item.institute},
 				#{item.model},
 				#{item.experiment},
@@ -164,6 +168,7 @@
 				#{item.ensembleMember},
 				#{item.variableName},
 				#{item.mipTable},
+				#{item.datasetVersion},
 				#{item.temporalStartYear},
 				#{item.temporalStartMonth},
 				#{item.temporalStartDay},
@@ -174,7 +179,8 @@
 				#{item.temporalEndDay},
 				#{item.temporalEndHour},
 				#{item.temporalEndMinute},
-				#{item.geographicalInfo}
+				#{item.geographicalInfo},
+				#{item.gridLabel}
 			)
 		</foreach>
 	</insert>

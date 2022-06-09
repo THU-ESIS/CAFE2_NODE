@@ -4,7 +4,7 @@
        default-autowire="byName">
 
     <import resource="classpath:applicationContext.xml"/>
-    <import resource="classpath:spring-config-mybatis.xml"/>
-    <import resource="classpath:spring-service.xml"/>
+    <!-- <import resource="classpath:spring-config-mybatis.xml"/> -->
+    <!-- <import resource="classpath:spring-service.xml"/> -->
 
 </beans>

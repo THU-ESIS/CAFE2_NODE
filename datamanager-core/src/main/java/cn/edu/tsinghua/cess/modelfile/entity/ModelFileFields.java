@@ -2,7 +2,7 @@ package cn.edu.tsinghua.cess.modelfile.entity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+// for ModelFileQueryService
 public enum ModelFileFields {
 	
 	institute("institute"),

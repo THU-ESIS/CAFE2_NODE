@@ -21,11 +21,13 @@ public class ModelFileParser {
 		
 		long begin = System.currentTimeMillis();
 		log.info("will begin to traverse and parse model file(s) under [path=" + path + "]");
-		
+		// Parsercontext: store directory stack, functions to retrieve information, check condition, logging
 		ParserContext context = new ParserContext(modelFileHandler);
 		
 		try {
+			// use directoryParser to control the recursive parsing workflow
 			directoryParser.parseDirectory(directory, context);
+			// after parsing directories and filenames, the information is provided to the modelFileHandler
 			modelFileHandler.flush();
 		} finally {
 			long elapsed = System.currentTimeMillis() - begin;

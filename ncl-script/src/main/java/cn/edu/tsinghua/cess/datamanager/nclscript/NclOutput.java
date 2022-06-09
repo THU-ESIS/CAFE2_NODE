@@ -22,7 +22,6 @@ public class NclOutput {
     private static Logger logger = Logger.getLogger(NclOutput.class);
 
     private static String TempFolder;
-    //private static String TempFolder="/mnt/CMIP5/cmip5_tmp/";
     private static String ncl_path;
     private static String ncl_env;
     private static String ScriptFolder;

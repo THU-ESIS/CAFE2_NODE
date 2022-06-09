@@ -5,16 +5,16 @@ CREATE TABLE
   id                    INT(10)       NOT NULL AUTO_INCREMENT,
   node_id               INT(10),
   full_path             VARCHAR(1024) NOT NULL,
-  mip_era               VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  institute             VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  model                 VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  experiment            VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  frequency             VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  modeling_realm        VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  ensemble_member       VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  variable_name         VARCHAR(1024) COLLATE utf8_bin NOT NULL,
-  mip_table             VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'NA',
-  dataset_version       VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'NA',
+  datasource_type       VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  institute             VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  model                 VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  experiment            VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  frequency             VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  modeling_realm        VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  ensemble_member       VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  variable_name         VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  mip_table             VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  dataset_version       VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
   temporal_start_year   VARCHAR(16),
   temporal_start_month  VARCHAR(16),
   temporal_start_day    VARCHAR(16),
@@ -25,8 +25,8 @@ CREATE TABLE
   temporal_end_day      VARCHAR(16),
   temporal_end_hour     VARCHAR(16),
   temporal_end_minute   VARCHAR(16),
-  grid_label            VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'NA',
-  create_time           DATETIME,
+  geographical_info     VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
+  grid_label            VARCHAR(1024) COLLATE utf8_bin NOT NULL DEFAULT 'N/A',
 
   INDEX ix_node_id (node_id),
   INDEX ix_institute (institute),
@@ -45,6 +45,7 @@ CREATE TABLE
   ENGINE =InnoDB
   DEFAULT CHARSET =utf8;
 
+
 DROP TABLE IF EXISTS task;
 CREATE TABLE task (
   id        INT(10) NOT NULL AUTO_INCREMENT,
@@ -56,6 +57,7 @@ CREATE TABLE task (
 )
   ENGINE =InnoDB
   DEFAULT CHARSET =utf8;
+
 
 DROP TABLE IF EXISTS task_subtask_list;
 CREATE TABLE task_subtask_list (

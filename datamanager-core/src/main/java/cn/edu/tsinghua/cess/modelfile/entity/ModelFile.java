@@ -10,7 +10,9 @@ public class ModelFile extends Model {
 	private Integer id;
 	private String fullPath;
 	
-	/* properties extracted from fileName */
+	/* properties extracted from filename, in FileParser.java
+	the fields are optional fields and fields that better extract from filenames.
+	 */
 	private String mipTable;
     private String temporalStartYear;
     private String temporalStartMonth;
@@ -23,6 +25,7 @@ public class ModelFile extends Model {
     private String temporalEndHour;
     private String temporalEndMinute;
     private String geographicalInfo;
+	private String gridLabel;
 
     public Integer getId() {
 		return id;
@@ -48,6 +51,12 @@ public class ModelFile extends Model {
     public void setGeographicalInfo(String geographicalInfo) {
         this.geographicalInfo = geographicalInfo;
     }
+	public String getGridLabel() {
+		return gridLabel;
+	}
+	public void setGridLabel(String gridLabel) {
+		this.gridLabel = gridLabel;
+	}
 	public String getTemporalStartYear() {
 		return temporalStartYear;
 	}
