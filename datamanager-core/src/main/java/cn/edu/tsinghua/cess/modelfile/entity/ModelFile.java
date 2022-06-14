@@ -1,15 +1,19 @@
 package cn.edu.tsinghua.cess.modelfile.entity;
 
 /**
+ * 
  * @author kurtyan777@gmail.com
+ *
  */
 public class ModelFile extends Model {
-
-    private Integer id;
-    private String fullPath;
-
-    /* properties extracted from fileName */
-//	private String mipTable;
+	
+	private Integer id;
+	private String fullPath;
+	
+	/* properties extracted from filename, in FileParser.java
+	the fields are optional fields and fields that better extract from filenames.
+	 */
+	private String mipTable;
     private String temporalStartYear;
     private String temporalStartMonth;
     private String temporalStartDay;
@@ -20,114 +24,98 @@ public class ModelFile extends Model {
     private String temporalEndDay;
     private String temporalEndHour;
     private String temporalEndMinute;
-    private String gridLabel;
+    private String geographicalInfo;
+	private String gridLabel;
 
     public Integer getId() {
-        return id;
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getFullPath() {
+		return fullPath;
+	}
+	public void setFullPath(String fullPath) {
+		this.fullPath = fullPath;
+	}
+	public String getMipTable() {
+		return mipTable;
+	}
+	public void setMipTable(String mipTable) {
+		this.mipTable = mipTable;
+	}
+    public String getGeographicalInfo() {
+        return geographicalInfo;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGeographicalInfo(String geographicalInfo) {
+        this.geographicalInfo = geographicalInfo;
     }
-
-    public String getFullPath() {
-        return fullPath;
-    }
-
-    public void setFullPath(String fullPath) {
-        this.fullPath = fullPath;
-    }
-//	public String getMipTable() {
-//		return mipTable;
-//	}
-//	public void setMipTable(String mipTable) {
-//		this.mipTable = mipTable;
-//	}
-//    public String getGridLabel() {
-//        return gridLabel;
-//    }
-//    public void setGridLabel(String gridLabel) {
-//        this.gridLabel = gridLabel;
-//}
-
-    public String getTemporalStartYear() {
-        return temporalStartYear;
-    }
-
-    public void setTemporalStartYear(String temporalStartYear) {
-        this.temporalStartYear = temporalStartYear;
-    }
-
-    public String getTemporalStartMonth() {
-        return temporalStartMonth;
-    }
-
-    public void setTemporalStartMonth(String temporalStartMonth) {
-        this.temporalStartMonth = temporalStartMonth;
-    }
-
-    public String getTemporalStartDay() {
-        return temporalStartDay;
-    }
-
-    public void setTemporalStartDay(String temporalStartDay) {
-        this.temporalStartDay = temporalStartDay;
-    }
-
-    public String getTemporalStartHour() {
-        return temporalStartHour;
-    }
-
-    public void setTemporalStartHour(String temporalStartHour) {
-        this.temporalStartHour = temporalStartHour;
-    }
-
-    public String getTemporalStartMinute() {
-        return temporalStartMinute;
-    }
-
-    public void setTemporalStartMinute(String temporalStartMinute) {
-        this.temporalStartMinute = temporalStartMinute;
-    }
-
-    public String getTemporalEndYear() {
-        return temporalEndYear;
-    }
-
-    public void setTemporalEndYear(String temporalEndYear) {
-        this.temporalEndYear = temporalEndYear;
-    }
-
-    public String getTemporalEndMonth() {
-        return temporalEndMonth;
-    }
-
-    public void setTemporalEndMonth(String temporalEndMonth) {
-        this.temporalEndMonth = temporalEndMonth;
-    }
-
-    public String getTemporalEndDay() {
-        return temporalEndDay;
-    }
-
-    public void setTemporalEndDay(String temporalEndDay) {
-        this.temporalEndDay = temporalEndDay;
-    }
-
-    public String getTemporalEndHour() {
-        return temporalEndHour;
-    }
-
-    public void setTemporalEndHour(String temporalEndHour) {
-        this.temporalEndHour = temporalEndHour;
-    }
-
-    public String getTemporalEndMinute() {
-        return temporalEndMinute;
-    }
-
-    public void setTemporalEndMinute(String temporalEndMinute) {
-        this.temporalEndMinute = temporalEndMinute;
-    }
+	public String getGridLabel() {
+		return gridLabel;
+	}
+	public void setGridLabel(String gridLabel) {
+		this.gridLabel = gridLabel;
+	}
+	public String getTemporalStartYear() {
+		return temporalStartYear;
+	}
+	public void setTemporalStartYear(String temporalStartYear) {
+		this.temporalStartYear = temporalStartYear;
+	}
+	public String getTemporalStartMonth() {
+		return temporalStartMonth;
+	}
+	public void setTemporalStartMonth(String temporalStartMonth) {
+		this.temporalStartMonth = temporalStartMonth;
+	}
+	public String getTemporalStartDay() {
+		return temporalStartDay;
+	}
+	public void setTemporalStartDay(String temporalStartDay) {
+		this.temporalStartDay = temporalStartDay;
+	}
+	public String getTemporalStartHour() {
+		return temporalStartHour;
+	}
+	public void setTemporalStartHour(String temporalStartHour) {
+		this.temporalStartHour = temporalStartHour;
+	}
+	public String getTemporalStartMinute() {
+		return temporalStartMinute;
+	}
+	public void setTemporalStartMinute(String temporalStartMinute) {
+		this.temporalStartMinute = temporalStartMinute;
+	}
+	public String getTemporalEndYear() {
+		return temporalEndYear;
+	}
+	public void setTemporalEndYear(String temporalEndYear) {
+		this.temporalEndYear = temporalEndYear;
+	}
+	public String getTemporalEndMonth() {
+		return temporalEndMonth;
+	}
+	public void setTemporalEndMonth(String temporalEndMonth) {
+		this.temporalEndMonth = temporalEndMonth;
+	}
+	public String getTemporalEndDay() {
+		return temporalEndDay;
+	}
+	public void setTemporalEndDay(String temporalEndDay) {
+		this.temporalEndDay = temporalEndDay;
+	}
+	public String getTemporalEndHour() {
+		return temporalEndHour;
+	}
+	public void setTemporalEndHour(String temporalEndHour) {
+		this.temporalEndHour = temporalEndHour;
+	}
+	public String getTemporalEndMinute() {
+		return temporalEndMinute;
+	}
+	public void setTemporalEndMinute(String temporalEndMinute) {
+		this.temporalEndMinute = temporalEndMinute;
+	}
 
 }
