@@ -1,12 +1,5 @@
 package test;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import cn.edu.tsinghua.cess.modelfile.entity.Model;
 import cn.edu.tsinghua.cess.task.entity.ScriptArgument;
 import cn.edu.tsinghua.cess.task.entity.SubTaskStatus;
@@ -16,25 +9,29 @@ import cn.edu.tsinghua.cess.task.entity.dto.TaskSubmition;
 import cn.edu.tsinghua.cess.task.service.TaskQueryService;
 import cn.edu.tsinghua.cess.task.service.TaskSubmitionService;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SubmitionTest {
-	
-	public static void main(String[] args) throws IOException, InterruptedException {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
 //		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
-        String[] scripts = new String[] {
-            "AnnualTS",
-            "GlobalContourEOF",
-            "GlobalContourLTM",
-            "GlobalContourTrend",
-            "PolarNHEOF",
-            "PolarNHLTM",
-            "PolarNHTrend",
-            "PolarSHEOF",
-            "PolarSHLTM",
-            "PolarSHTrend",
-            "SeasonalTS"
+        String[] scripts = new String[]{
+                "AnnualTS",
+                "GlobalContourEOF",
+                "GlobalContourLTM",
+                "GlobalContourTrend",
+                "PolarNHEOF",
+                "PolarNHLTM",
+                "PolarNHTrend",
+                "PolarSHEOF",
+                "PolarSHLTM",
+                "PolarSHTrend",
+                "SeasonalTS"
         };
-        
+
 //		ctx.hashCode();
 
         for (String script : scripts) {
@@ -72,7 +69,7 @@ public class SubmitionTest {
 
             System.out.println();
         }
-	}
+    }
 
     private static TaskSubmition getSubmition(String nclScript) {
         Model model = new Model();
@@ -83,7 +80,7 @@ public class SubmitionTest {
         model.setVariableName("transix");
         model.setEnsembleMember("r1i1p1");
         model.setFrequency("mon");
-        
+
         Model model2 = new Model();
         model2.setInstitute("BCC");
         model2.setModel("bcc-csm1-1");

@@ -47,10 +47,10 @@ public class ModelQueryParam {
     @Override
     public String toString() {
         return "ModelQueryParam{" +
-            "filter=" + filter +
-            ", page=" + page +
-            ", pageSize=" + pageSize +
-            '}';
+                "filter=" + filter +
+                ", page=" + page +
+                ", pageSize=" + pageSize +
+                '}';
     }
 
 }

@@ -1,12 +1,11 @@
 package cn.edu.tsinghua.cess.task.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import cn.edu.tsinghua.cess.deployment.entity.Deployment;
 import cn.edu.tsinghua.cess.deployment.service.DeploymentService;
 import cn.edu.tsinghua.cess.task.service.TaskSubmitionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TaskSubmitionServiceFactory {

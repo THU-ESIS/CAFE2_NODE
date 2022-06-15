@@ -1,7 +1,5 @@
 package cn.edu.tsinghua.cess.modelfile.entity;
 
-import cn.edu.tsinghua.cess.modelfile.entity.ModelFile;
-
 import java.util.List;
 
 /**

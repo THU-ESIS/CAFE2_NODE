@@ -25,17 +25,17 @@ public interface ModelFileQueryService {
      *
      * @return
      */
-	@Remote("/modelfile/query/filter")
-	public ModelFileFilter listFilter();
+    @Remote("/modelfile/query/filter")
+    public ModelFileFilter listFilter();
 
-	public Model queryModelWithTemporal(Model model);
-	
-	public List<String> queryModelFile(Model model);
+    public Model queryModelWithTemporal(Model model);
 
-	@Remote("/modelfile/query_related_workernode")
-	public ModelNodeRelation[] queryRelatedNodes(Model[] modelList);
+    public List<String> queryModelFile(Model model);
 
-	@Remote(value = "/modelfile/query_by_dto", method = RequestMethod.POST)
-	public ModelQueryResult queryModel(ModelQueryParam param);
+    @Remote("/modelfile/query_related_workernode")
+    public ModelNodeRelation[] queryRelatedNodes(Model[] modelList);
+
+    @Remote(value = "/modelfile/query_by_dto", method = RequestMethod.POST)
+    public ModelQueryResult queryModel(ModelQueryParam param);
 
 }

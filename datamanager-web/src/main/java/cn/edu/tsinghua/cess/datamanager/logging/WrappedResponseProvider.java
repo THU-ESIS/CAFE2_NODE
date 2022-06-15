@@ -26,7 +26,7 @@ public class WrappedResponseProvider {
         this.bodyCachingThreshold = bodyCachingThreshold;
         this.wrappingResponse = (HttpServletResponse) Proxy.newProxyInstance(
                 WrappedResponseProvider.class.getClassLoader(),
-                new Class[] { HttpServletResponse.class },
+                new Class[]{HttpServletResponse.class},
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -117,9 +117,9 @@ public class WrappedResponseProvider {
          * underlying output stream.
          *
          * @param out the underlying output stream to be assigned to
-         *                the field <tt>this.out</tt> for later use, or
-         *                <code>null</code> if this instance is to be
-         *                created without an underlying stream.
+         *            the field <tt>this.out</tt> for later use, or
+         *            <code>null</code> if this instance is to be
+         *            created without an underlying stream.
          */
         public CachingOutputStream(OutputStream out, int capacityThreshold) {
             wrapped = out;

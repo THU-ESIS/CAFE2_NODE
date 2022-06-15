@@ -22,10 +22,9 @@ import java.util.concurrent.Callable;
 @Controller
 public class ModelFileRemoteServiceApi {
 
-    private Logger logger = Logger.getLogger(getClass());
-
     @Autowired
     ModelFileQueryService service;
+    private Logger logger = Logger.getLogger(getClass());
 
     @RequestMapping(value = "/modelfile/query_by_dto", method = RequestMethod.POST)
     @ResponseBody

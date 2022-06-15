@@ -18,8 +18,12 @@ import java.util.*;
  */
 public class CmdExecutor {
 
+    public final static String FIGURE_TYPE_POLAR = "polar";
+    public final static String FIGURE_TYPE_ADDLON = "addlon";
+    public final static String FIGURE_TYPE_ADDTIME = "addtime";
+    public final static String FIGURE_TYPE_ADDBOTH = "addboth";
+    public final static String FIGURE_TYPE_NULL = "null";
     private Logger logger = Logger.getLogger(getClass());
-
     private String begin_time;
     private String inputFileFolder;
     private List<String> filelist;
@@ -36,11 +40,6 @@ public class CmdExecutor {
     private int taskId;
     private String OutputDir;
     private String var_name;
-    public final static String FIGURE_TYPE_POLAR = "polar";
-    public final static String FIGURE_TYPE_ADDLON = "addlon";
-    public final static String FIGURE_TYPE_ADDTIME = "addtime";
-    public final static String FIGURE_TYPE_ADDBOTH = "addboth";
-    public final static String FIGURE_TYPE_NULL = "null";
 
     CmdExecutor(NclScriptContext context) {
         begin_time = context.getBeginTime();
@@ -61,148 +60,16 @@ public class CmdExecutor {
         OutputDir = NclOutput.getOutputDir(taskId);
     }
 
-    public void setTimeout(int timeout) {
-        //To change body of generated methods, choose Tools | Templates.
-        this.timeout = timeout;
-    }
-
-    public int getTimeout() {
-        return this.timeout;//To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int execute(NclScriptContext context, String cmd) {
+    public static int ececute(String cmd, boolean isNeedPrint) {
         Process proc = null;
         int result = -1;
-        try
-        {
+        try {
             List<StreamReader> list = new ArrayList<StreamReader>();
             proc = Runtime.getRuntime().exec(cmd);
-            StreamReader error = new StreamReader(proc.getErrorStream(), "Error",logger);
-            StreamReader output = new StreamReader(proc.getInputStream(), "Output",logger);
-            list.add(error);
-            list.add(output);
-            error.start();
-            output.start();
-            for (StreamReader sr : list)
-            {
-                sr.join();
-            }
-            result = proc.waitFor();
-        }
-        catch (InterruptedException ex)
-        {
-            context.failed(ex);
-//            context.failed(new Exception(errorInfo));
-        }
-        catch (IOException e)
-        {
-            context.failed(e);
-//            context.failed(new Exception(errorInfo));
-        }
-        finally
-        {
-            proc.destroy();
-        }
+            StreamReader error = new StreamReader(proc.getErrorStream(), "Error", null);
+            StreamReader output = new StreamReader(proc.getInputStream(), "Output", null);
 
-        return result;
-    }
-
-    private int execute(NclScriptContext context, String cmd,String dataType) {
-        Process proc = null;
-        int result = -1;
-        String errorInfo="Fail to generate "+dataType;
-        try
-        {
-            List<StreamReader> list = new ArrayList<StreamReader>();
-            proc = Runtime.getRuntime().exec(cmd);
-            StreamReader error = new StreamReader(proc.getErrorStream(), "Error",logger);
-            StreamReader output = new StreamReader(proc.getInputStream(), "Output",logger);
-            list.add(error);
-            list.add(output);
-            error.start();
-            output.start();
-            for (StreamReader sr : list)
-            {
-                sr.join();
-            }
-            result = proc.waitFor();
-            }
-            catch (InterruptedException ex)
-            {
-                //context.failed(ex);
-                context.failed(new Exception(errorInfo));
-            }
-            catch (IOException e)
-            {
-                //context.failed(e);
-                context.failed(new Exception(errorInfo));
-            }
-            finally
-            {
-                proc.destroy();
-            }
-
-        return result;
-    }
-
-    private int execute(NclScriptContext context, String cmd[],String[] env) {
-        Process proc = null;
-        int result = -1;
-        try
-        {
-            List<StreamReader> list = new ArrayList<StreamReader>();
-            proc = Runtime.getRuntime().exec(cmd,env);
-            StreamReader error = new StreamReader(proc.getErrorStream(), "Error",logger);
-            StreamReader output = new StreamReader(proc.getInputStream(), "Output",logger);
-            list.add(error);
-            list.add(output);
-            error.start();
-            output.start();
-            for (StreamReader sr : list)
-            {
-                sr.join();
-            }
-            proc.getOutputStream().close();
-            result = proc.waitFor();
-        }
-        catch (InterruptedException ex)
-        {
-            context.failed(ex);
-        }
-        catch (IOException e)
-        {
-            context.failed(e);
-        }
-        finally
-        {
-            proc.destroy();
-        }
-
-        return result;
-    }
-
-    public int rmData(NclScriptContext context, File f){
-        int re=-1;
-        if(f.exists()){
-            String cmd="rm "+f.getAbsolutePath();
-            re=execute(context,cmd);
-        }
-        return re;
-    }
-
-    public static int ececute(String cmd, boolean isNeedPrint)
-    {
-        Process proc = null;
-        int result = -1;
-        try
-        {
-            List<StreamReader> list = new ArrayList<StreamReader>();
-            proc = Runtime.getRuntime().exec(cmd);
-            StreamReader error = new StreamReader(proc.getErrorStream(), "Error",null);
-            StreamReader output = new StreamReader(proc.getInputStream(), "Output",null);
-
-            if (isNeedPrint)
-            {
+            if (isNeedPrint) {
 
                 list.add(error);
                 list.add(output);
@@ -210,31 +77,130 @@ public class CmdExecutor {
 
             error.start();
             output.start();
-            if (isNeedPrint)
-            {
-                for (StreamReader sr : list)
-                {
+            if (isNeedPrint) {
+                for (StreamReader sr : list) {
                     sr.join();
                 }
             }
             result = proc.waitFor();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             proc.destroy();
         }
 
         return result;
     }
 
+    public int getTimeout() {
+        return this.timeout;//To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setTimeout(int timeout) {
+        //To change body of generated methods, choose Tools | Templates.
+        this.timeout = timeout;
+    }
+
+    private int execute(NclScriptContext context, String cmd) {
+        Process proc = null;
+        int result = -1;
+        try {
+            List<StreamReader> list = new ArrayList<StreamReader>();
+            proc = Runtime.getRuntime().exec(cmd);
+            StreamReader error = new StreamReader(proc.getErrorStream(), "Error", logger);
+            StreamReader output = new StreamReader(proc.getInputStream(), "Output", logger);
+            list.add(error);
+            list.add(output);
+            error.start();
+            output.start();
+            for (StreamReader sr : list) {
+                sr.join();
+            }
+            result = proc.waitFor();
+        } catch (InterruptedException ex) {
+            context.failed(ex);
+//            context.failed(new Exception(errorInfo));
+        } catch (IOException e) {
+            context.failed(e);
+//            context.failed(new Exception(errorInfo));
+        } finally {
+            proc.destroy();
+        }
+
+        return result;
+    }
+
+    private int execute(NclScriptContext context, String cmd, String dataType) {
+        Process proc = null;
+        int result = -1;
+        String errorInfo = "Fail to generate " + dataType;
+        try {
+            List<StreamReader> list = new ArrayList<StreamReader>();
+            proc = Runtime.getRuntime().exec(cmd);
+            StreamReader error = new StreamReader(proc.getErrorStream(), "Error", logger);
+            StreamReader output = new StreamReader(proc.getInputStream(), "Output", logger);
+            list.add(error);
+            list.add(output);
+            error.start();
+            output.start();
+            for (StreamReader sr : list) {
+                sr.join();
+            }
+            result = proc.waitFor();
+        } catch (InterruptedException ex) {
+            //context.failed(ex);
+            context.failed(new Exception(errorInfo));
+        } catch (IOException e) {
+            //context.failed(e);
+            context.failed(new Exception(errorInfo));
+        } finally {
+            proc.destroy();
+        }
+
+        return result;
+    }
+
+    private int execute(NclScriptContext context, String cmd[], String[] env) {
+        Process proc = null;
+        int result = -1;
+        try {
+            List<StreamReader> list = new ArrayList<StreamReader>();
+            proc = Runtime.getRuntime().exec(cmd, env);
+            StreamReader error = new StreamReader(proc.getErrorStream(), "Error", logger);
+            StreamReader output = new StreamReader(proc.getInputStream(), "Output", logger);
+            list.add(error);
+            list.add(output);
+            error.start();
+            output.start();
+            for (StreamReader sr : list) {
+                sr.join();
+            }
+            proc.getOutputStream().close();
+            result = proc.waitFor();
+        } catch (InterruptedException ex) {
+            context.failed(ex);
+        } catch (IOException e) {
+            context.failed(e);
+        } finally {
+            proc.destroy();
+        }
+
+        return result;
+    }
+
+    public int rmData(NclScriptContext context, File f) {
+        int re = -1;
+        if (f.exists()) {
+            String cmd = "rm " + f.getAbsolutePath();
+            re = execute(context, cmd);
+        }
+        return re;
+    }
+
     //按照文件名称排序
     public List orderByName(String filePath) {
         List files = Arrays.asList(new File(filePath).listFiles());
-        Collections.sort(files, new Comparator< File>() {
+        Collections.sort(files, new Comparator<File>() {
             @Override
             public int compare(File o1, File o2) {
                 if (o1.isDirectory() && o2.isFile())
@@ -252,13 +218,13 @@ public class CmdExecutor {
         System.out.println("beginIndex:" + end_index + "");
         String fi_ori = NclOutput.getOriDir(OutputDir);
         System.out.println(filelist.get(0));
-        String fi_ori_name = filelist.get(0).substring(inputFileFolder.length() + 1, filelist.get(0).length() - 16) +begin_time + "-" + end_time + "_ori.nc";
+        String fi_ori_name = filelist.get(0).substring(inputFileFolder.length() + 1, filelist.get(0).length() - 16) + begin_time + "-" + end_time + "_ori.nc";
         StringBuilder buffer = new StringBuilder("");
         buffer.append("ncrcat ").append("-d ").append("time,");
         buffer.append(Integer.toString(begin_index) + ",");
         buffer.append(Integer.toString(end_index) + " ");
         File f = new File(filelist.get(0));
-        List filelist=orderByName(f.getParent());
+        List filelist = orderByName(f.getParent());
         for (int i = 0; i < filelist.size(); i++) {
             buffer.append(filelist.get(i) + " ");
         }
@@ -267,12 +233,12 @@ public class CmdExecutor {
         String cmd = buffer.toString();
         System.out.println(cmd);
         logger.info("merge: cmd=" + cmd);
-        int result=0;
+        int result = 0;
         if (!file_ori.exists()) {
             result = execute(context, cmd, "original merged data");
             //TimeOutValidate.fileValidate(timeout, file_ori, "original merged data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated original merged data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated original merged data!");
         return file_ori;
     }
 
@@ -281,15 +247,15 @@ public class CmdExecutor {
         System.out.println("beginIndex:" + end_index + "");
         String fi_ori = NclOutput.getOriDir(OutputDir);
         System.out.println(filelist.get(0));
-        int bIndex=begin_index-12;
-        if(bIndex<12) bIndex=begin_index;
-        String fi_ori_name = filelist.get(0).substring(inputFileFolder.length() + 1, filelist.get(0).length() - 16) +begin_time + "-" + end_time + "_ori.nc";
+        int bIndex = begin_index - 12;
+        if (bIndex < 12) bIndex = begin_index;
+        String fi_ori_name = filelist.get(0).substring(inputFileFolder.length() + 1, filelist.get(0).length() - 16) + begin_time + "-" + end_time + "_ori.nc";
         StringBuilder buffer = new StringBuilder("");
         buffer.append("ncrcat ").append("-d ").append("time,");
         buffer.append(Integer.toString(bIndex) + ",");
         buffer.append(Integer.toString(end_index) + " ");
         File f = new File(filelist.get(0));
-        List filelist=orderByName(f.getParent());
+        List filelist = orderByName(f.getParent());
         for (int i = 0; i < filelist.size(); i++) {
             buffer.append(filelist.get(i) + " ");
         }
@@ -298,12 +264,12 @@ public class CmdExecutor {
         String cmd = buffer.toString();
         System.out.println(cmd);
         logger.info("merge: cmd=" + cmd);
-        int result=0;
+        int result = 0;
         if (!file_ori.exists()) {
             result = execute(context, cmd, "original merged data");
             //TimeOutValidate.fileValidate(timeout, file_ori, "original merged data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated original merged data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated original merged data!");
         return file_ori;
     }
 
@@ -315,12 +281,12 @@ public class CmdExecutor {
         String cmd = "cdo remapbil,r360x180 " + InputFile.getAbsolutePath() + " " + file_cdo.getAbsolutePath();
         logger.info("regridding: cmd=" + cmd);
         System.out.println(cmd);
-        int result=0;
+        int result = 0;
         if (!file_cdo.exists()) {
-            result=execute(context, cmd,"cdo converted data");
-           // TimeOutValidate.fileValidate(timeout, file_cdo, "cdo converted data", context, 1000);
+            result = execute(context, cmd, "cdo converted data");
+            // TimeOutValidate.fileValidate(timeout, file_cdo, "cdo converted data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated cdo converted data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated cdo converted data!");
         return file_cdo;
     }
 
@@ -332,12 +298,12 @@ public class CmdExecutor {
         String cmd = "cdo " + "yearavg " + InputFile.getAbsolutePath() + " " + file_year.getAbsolutePath();
         logger.info("yearavg: cmd=" + cmd);
         System.out.println(cmd);
-        int result=0;
+        int result = 0;
         if (!file_year.exists()) {
-            result=execute(context, cmd,"year average data");
+            result = execute(context, cmd, "year average data");
             //TimeOutValidate.fileValidate(timeout, file_year, "year average data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated year average data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated year average data!");
         return file_year;
     }
 
@@ -349,12 +315,12 @@ public class CmdExecutor {
         String cmd = "ncra " + InputFile.getAbsolutePath() + " " + file_mean.getAbsolutePath();
         logger.info("ncra: cmd=" + cmd);
         System.out.println(cmd);
-        int result=0;
+        int result = 0;
         if (!file_mean.exists()) {
-            result=execute(context, cmd,"long term mean data");
+            result = execute(context, cmd, "long term mean data");
             TimeOutValidate.fileValidate(timeout, file_mean, "long term mean data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated long term mean data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated long term mean data!");
         return file_mean;
     }
 
@@ -366,12 +332,12 @@ public class CmdExecutor {
         String cmd = "cdo " + "seasavg " + InputFile.getAbsolutePath() + " " + file_seas.getAbsolutePath();
         logger.info("seasavg: cmd=" + cmd);
         System.out.println(cmd);
-        int result=0;
+        int result = 0;
         if (!file_seas.exists()) {
-            result=execute(context, cmd,"seasonal average data");
+            result = execute(context, cmd, "seasonal average data");
             TimeOutValidate.fileValidate(timeout, file_seas, "seasonal average data", context, 1000);
         }
-        if(result==0) context.updateProgress(percentage, "Successfully generated seasonal average data!");
+        if (result == 0) context.updateProgress(percentage, "Successfully generated seasonal average data!");
         return file_seas;
     }
 
@@ -448,17 +414,16 @@ public class CmdExecutor {
         String nclscript = NclOutput.getScriptPath(NclScript);
         Arguments.add(nclscript);
         String[] cmd = new String[Arguments.size()];
-        StringBuilder sCmd=new StringBuilder("");
+        StringBuilder sCmd = new StringBuilder("");
 
         for (int i = 0; i < Arguments.size(); i++) {
             cmd[i] = Arguments.get(i);
 //            System.out.println(cmd[i] + "\n");
             logger.info("ncl: cmd=" + cmd[i] + "\n");
 //            sCmd.append(cmd[i]+" ");
-            if(i>0&&i<(Arguments.size()-1)){
-                sCmd.append("\'"+cmd[i]+"\' ");
-            }
-            else sCmd.append(cmd[i]+" ");
+            if (i > 0 && i < (Arguments.size() - 1)) {
+                sCmd.append("\'" + cmd[i] + "\' ");
+            } else sCmd.append(cmd[i] + " ");
         }
 //        String ss="\'fi_data =\"/usr/local/cmip5_tmp/20160924/cdo_data\"\' ";
 //        String cc="/usr/local/ncl/bin/ncl latmin=45 latmax=90 fi_data=\"/usr/local/cmip5_tmp/20160924/cdo_data\" /usr/local/nclscripts/PolarNHEOF.ncl ";
@@ -476,21 +441,20 @@ public class CmdExecutor {
 //            int result=execute(context,cmd,env);
 //            int result=execute(context,sCmd.toString());
 
-            int result=NclScriptUtil.waitFor(p);
+            int result = NclScriptUtil.waitFor(p);
 
 //            int result=(new CommandUtil()).doWaitFor(p);
             System.out.println(result);
-            if(result==0){
+            if (result == 0) {
                 context.updateProgress(95, "Successfully executed NCL script!");
-            	for (int i = 0; i < outputfiles.length; i++) {
-			        String type = outputfiles[i].outputType;
-                	for (int j = 0; j < outputfiles[i].count; j++) {
-                   	 context.addResult(type, outputfiles[i].outputFile[j].getAbsolutePath());
-                	}
-            	}
+                for (int i = 0; i < outputfiles.length; i++) {
+                    String type = outputfiles[i].outputType;
+                    for (int j = 0; j < outputfiles[i].count; j++) {
+                        context.addResult(type, outputfiles[i].outputFile[j].getAbsolutePath());
+                    }
+                }
                 context.updateProgress(100, "Task Completed!");
-            }
-            else {
+            } else {
                 context.failed(new Exception("Fail to execute NCL script!"));
             }
 

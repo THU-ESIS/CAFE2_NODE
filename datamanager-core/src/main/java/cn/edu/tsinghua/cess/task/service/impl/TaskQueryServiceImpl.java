@@ -27,8 +27,6 @@ import java.util.*;
  */
 @Component
 public class TaskQueryServiceImpl implements TaskQueryService {
-	
-	private Logger log = Logger.getLogger(getClass());
 
     @Autowired
     TaskQueryDao taskQueryDao;
@@ -36,11 +34,10 @@ public class TaskQueryServiceImpl implements TaskQueryService {
     DeploymentService deploymentService;
     @Autowired
     RemoteServiceFactory remoteServiceFactory;
-
     @Autowired
     @Qualifier("apiPath")
     String apiPath;
-
+    private Logger log = Logger.getLogger(getClass());
 
     @Override
     public SubTaskResult[] queryTaskResult(String uuid) {
@@ -49,9 +46,9 @@ public class TaskQueryServiceImpl implements TaskQueryService {
         if (task == null) {
             subTaskList = new ArrayList<SubTaskListEntry>();
         } else {
-            subTaskList =taskQueryDao.querySubTaskList(task.getId());
+            subTaskList = taskQueryDao.querySubTaskList(task.getId());
         }
-        
+
         log.info("query subTaskListEntry of [taskId=" + uuid + "], got [" + subTaskList + "]");
         List<SubTaskResult> subTaskResultList = this.queryByDeployMode(subTaskList);
 
@@ -105,8 +102,8 @@ public class TaskQueryServiceImpl implements TaskQueryService {
     }
 
     private SubTaskResult querySingleSubTaskResult(Integer subTaskId) {
-    	log.info("querySingleSubTaskResult called, [subTaskId=" + subTaskId + "]");
-    	
+        log.info("querySingleSubTaskResult called, [subTaskId=" + subTaskId + "]");
+
         Deployment deployment = deploymentService.get();
         SubTask subTask = taskQueryDao.querySubTaskResult(subTaskId);
 
@@ -130,28 +127,28 @@ public class TaskQueryServiceImpl implements TaskQueryService {
 
             dtoList.add(dto);
         }
-        
+
         result.setResultFile(dtoList);
 
         return result;
     }
 
     private List<SubTaskResult> queryAsLocal(List<SubTaskListEntry> subTaskList) {
-    	log.info("queryAsLocal called");
-    	
+        log.info("queryAsLocal called");
+
         List<Integer> subTaskIdList = new ArrayList<Integer>();
         for (SubTaskListEntry entry : subTaskList) {
             subTaskIdList.add(entry.getSubTaskId());
         }
 
         return new ArrayList<SubTaskResult>(Arrays.asList(
-            querySubTaskResult(subTaskIdList.toArray(new Integer[0]))
+                querySubTaskResult(subTaskIdList.toArray(new Integer[0]))
         ));
     }
 
     private List<SubTaskResult> queryByWorkerNode(List<SubTaskListEntry> subTaskList) {
-    	log.info("queryByWorkerNode called");
-    	
+        log.info("queryByWorkerNode called");
+
         List<SubTaskResult> subTaskResultList = new ArrayList<SubTaskResult>();
 
         Map<Integer, List<Integer>> nodeIdListMap = new HashMap<Integer, List<Integer>>();
@@ -164,13 +161,13 @@ public class TaskQueryServiceImpl implements TaskQueryService {
             }
             nodeIdListMap.get(nodeId).add(entry.getSubTaskId());
         }
-        
+
         log.info("this query will involve [nodeCount=" + nodeIdListMap.size() + "] worker nodes");
 
         for (Map.Entry<Integer, List<Integer>> entry : nodeIdListMap.entrySet()) {
             Integer nodeId = entry.getKey();
             List<Integer> subTaskIdList = entry.getValue();
-            
+
             log.info("will query [nodeId=" + nodeId + "], with [subTaskIdList=" + subTaskIdList + "]");
             SubTaskResult[] subTaskResultListOfNode = getSubTaskQueryService(nodeId).querySubTaskResult(subTaskIdList.toArray(new Integer[0]));
 
@@ -180,14 +177,14 @@ public class TaskQueryServiceImpl implements TaskQueryService {
         return subTaskResultList;
     }
 
-	@Override
-	public SubTaskResultFile querySubTaskResultFile(Integer subTaskId, Integer resultFileId) {
-		log.info("querySubTaskResultFile called");
-		
+    @Override
+    public SubTaskResultFile querySubTaskResultFile(Integer subTaskId, Integer resultFileId) {
+        log.info("querySubTaskResultFile called");
+
         SubTask result = taskQueryDao.querySubTaskResult(subTaskId);
 
         if (result != null) {
-            List<SubTaskResultFile> files  = result.getResultFileList();
+            List<SubTaskResultFile> files = result.getResultFileList();
 
             if (!CollectionUtils.isEmpty(files)) {
                 for (SubTaskResultFile f : files) {
@@ -199,7 +196,7 @@ public class TaskQueryServiceImpl implements TaskQueryService {
 
         }
 
-		return null;
-	}
+        return null;
+    }
 
 }

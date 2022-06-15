@@ -18,55 +18,57 @@ import java.util.List;
 @RequestMapping("/deployment")
 @Controller
 public class DeploymentAction {
-	
-	@Autowired DeploymentService deploymentService;
-	@Autowired WorkerNodeManageService workerNodeManageService;
 
-	@RequestMapping(value = "/deploy", method = RequestMethod.POST)
-	public String deploy(
-				@RequestParam("mode") String mode,
-			    @RequestParam String nodeName,
-			    @RequestParam String nodeIp,
-			    @RequestParam Integer nodePort,
-			    @RequestParam String rootPath,
-			    @RequestParam String centralNodeIp,
-			    @RequestParam Integer centralNodePort,
-			    @RequestParam String centralNodeRootPath
-			) {
-		final Deployment deployment = new Deployment();
-		
-		deployment.setMode(DeployMode.valueOf(mode));
-		deployment.setNodeName(nodeName);
-		deployment.setNodeIp(nodeIp);
-		deployment.setNodePort(nodePort);
-		deployment.setRootPath(rootPath);
-		deployment.setCentralNodeIp(centralNodeIp);
-		deployment.setCentralNodePort(centralNodePort);
-		deployment.setCentralNodeRootPath(centralNodeRootPath);
+    @Autowired
+    DeploymentService deploymentService;
+    @Autowired
+    WorkerNodeManageService workerNodeManageService;
+
+    @RequestMapping(value = "/deploy", method = RequestMethod.POST)
+    public String deploy(
+            @RequestParam("mode") String mode,
+            @RequestParam String nodeName,
+            @RequestParam String nodeIp,
+            @RequestParam Integer nodePort,
+            @RequestParam String rootPath,
+            @RequestParam String centralNodeIp,
+            @RequestParam Integer centralNodePort,
+            @RequestParam String centralNodeRootPath
+    ) {
+        final Deployment deployment = new Deployment();
+
+        deployment.setMode(DeployMode.valueOf(mode));
+        deployment.setNodeName(nodeName);
+        deployment.setNodeIp(nodeIp);
+        deployment.setNodePort(nodePort);
+        deployment.setRootPath(rootPath);
+        deployment.setCentralNodeIp(centralNodeIp);
+        deployment.setCentralNodePort(centralNodePort);
+        deployment.setCentralNodeRootPath(centralNodeRootPath);
 
         deploymentService.deploy(deployment);
 
         return "redirect:";  // after deployment, redirect the browser to "/web/deployment" as to show the result
-	}
-	
-	@RequestMapping("")
-	public ModelAndView showDeployment() {
+    }
+
+    @RequestMapping("")
+    public ModelAndView showDeployment() {
         try {
             Deployment deployment = deploymentService.get();
-            
+
             ModelAndView mv = new ModelAndView("deployment/show");
             mv.addObject("deployment", deployment);
-            
+
             if (deployment.getMode() == DeployMode.DISTRIBUTED_CENTRAL) {
-            	List<WorkerNode> workerNodeList = workerNodeManageService.listAll();
-            	mv.addObject("workerNodeList", workerNodeList);
+                List<WorkerNode> workerNodeList = workerNodeManageService.listAll();
+                mv.addObject("workerNodeList", workerNodeList);
             }
 
             return mv;
         } catch (NotYetDeployedException e) {
             return new ModelAndView("deployment/add");
         }
-	}
+    }
 
 
 }

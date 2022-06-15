@@ -8,7 +8,7 @@ import java.util.List;
 public class TaskSubmition {
 
     private List<Model> models;
-	private ScriptArgument nclScript;
+    private ScriptArgument nclScript;
 
     public List<Model> getModels() {
         return models;
@@ -18,21 +18,21 @@ public class TaskSubmition {
         this.models = models;
     }
 
-	public ScriptArgument getNclScript() {
-		return nclScript;
-	}
+    public ScriptArgument getNclScript() {
+        return nclScript;
+    }
 
-	public void setNclScript(ScriptArgument script) {
-		this.nclScript = script;
-	}
+    public void setNclScript(ScriptArgument script) {
+        this.nclScript = script;
+    }
 
 
     @Override
     public String toString() {
         return "TaskSubmition{" +
-            "models=" + models +
-            ", nclScript=" + nclScript +
-            '}';
+                "models=" + models +
+                ", nclScript=" + nclScript +
+                '}';
     }
 
 }

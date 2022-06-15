@@ -17,25 +17,26 @@ import java.util.concurrent.Callable;
 @Controller
 public class ModelFilePersistApi {
 
-    @Autowired ModelFileManageService modelFileManageService;
+    @Autowired
+    ModelFileManageService modelFileManageService;
 
     @RequestMapping(
-    			value = "/modelfile/persist",
-    			method = RequestMethod.POST, 
-    			consumes = "application/json",
-    			produces = "application/json"
-    		)
+            value = "/modelfile/persist",
+            method = RequestMethod.POST,
+            consumes = "application/json",
+            produces = "application/json"
+    )
     @ResponseBody
     public ApiResult persist(@RequestBody final ModelFileList modelFileList) {
-    	return ApiUtil.execute(new Callable<Object>() {
-			
-			@Override
-			public Object call() throws Exception {
-		        modelFileManageService.insertModelFileList(modelFileList);
-				return null;
-			}
-		});
-    	
+        return ApiUtil.execute(new Callable<Object>() {
+
+            @Override
+            public Object call() throws Exception {
+                modelFileManageService.insertModelFileList(modelFileList);
+                return null;
+            }
+        });
+
     }
 
 }

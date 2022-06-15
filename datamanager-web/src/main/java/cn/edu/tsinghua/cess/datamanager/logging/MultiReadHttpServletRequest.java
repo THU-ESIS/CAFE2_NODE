@@ -10,7 +10,8 @@ import java.io.*;
 public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
     private ByteArrayOutputStream cachedBytes;
 
-    public MultiReadHttpServletRequest(HttpServletRequest request) { super(request);
+    public MultiReadHttpServletRequest(HttpServletRequest request) {
+        super(request);
     }
 
     @Override
@@ -27,9 +28,9 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     private void cacheInputStream() throws IOException {
-    /* Cache the inputstream in order to read it multiple times. For
-     * convenience, I use apache.commons IOUtils
-     */
+        /* Cache the inputstream in order to read it multiple times. For
+         * convenience, I use apache.commons IOUtils
+         */
         cachedBytes = new ByteArrayOutputStream();
         IOUtils.copy(super.getInputStream(), cachedBytes);
     }
@@ -39,7 +40,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
         private ByteArrayInputStream input;
 
         public CachedServletInputStream() {
-      /* create a new input stream from the cached request body */
+            /* create a new input stream from the cached request body */
             input = new ByteArrayInputStream(cachedBytes.toByteArray());
         }
 

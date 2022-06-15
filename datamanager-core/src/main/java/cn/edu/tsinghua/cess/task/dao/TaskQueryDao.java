@@ -1,12 +1,11 @@
 package cn.edu.tsinghua.cess.task.dao;
 
-import java.util.List;
-
+import cn.edu.tsinghua.cess.task.entity.SubTask;
+import cn.edu.tsinghua.cess.task.entity.SubTaskListEntry;
 import cn.edu.tsinghua.cess.task.entity.Task;
 import org.apache.ibatis.annotations.Param;
 
-import cn.edu.tsinghua.cess.task.entity.SubTask;
-import cn.edu.tsinghua.cess.task.entity.SubTaskListEntry;
+import java.util.List;
 
 /**
  * Created by kurt on 2014/9/22.

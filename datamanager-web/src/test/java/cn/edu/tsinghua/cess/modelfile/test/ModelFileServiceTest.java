@@ -24,80 +24,82 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:applicationContext.xml")
 public class ModelFileServiceTest {
-	
-	@Autowired ModelFileQueryService modelFileQueryService;
-	@Autowired ModelFileManageService modelFileManageService;
-	@Autowired ModelFileDao modelFileDao;
-	
-	@Test
-	public void testListFilter() {
-		ModelFileFilter filter = modelFileQueryService.listFilter();
-		Assert.assertNotNull(filter);
-	}
-	
-	@Test
-	public void testQueryModel() {
-		ModelFileFilter filter = modelFileQueryService.listFilter();
-		PagedList<Model> modelList = modelFileQueryService.queryModel(new ModelQueryParam(filter, 0, 100)).getModelList();
-		
-		Assert.assertNotNull(modelList);
-	}
-	
-	@Test
-	public void testQueryModelWithTemporal() {
-		ModelFileFilter filter = modelFileQueryService.listFilter();
-		ModelFileFilter single = getSingleFilter(filter);
-        PagedList<Model> modelList =  modelFileQueryService.queryModel(new ModelQueryParam(single, 0, 10)).getModelList();
+
+    @Autowired
+    ModelFileQueryService modelFileQueryService;
+    @Autowired
+    ModelFileManageService modelFileManageService;
+    @Autowired
+    ModelFileDao modelFileDao;
+
+    @Test
+    public void testListFilter() {
+        ModelFileFilter filter = modelFileQueryService.listFilter();
+        Assert.assertNotNull(filter);
+    }
+
+    @Test
+    public void testQueryModel() {
+        ModelFileFilter filter = modelFileQueryService.listFilter();
+        PagedList<Model> modelList = modelFileQueryService.queryModel(new ModelQueryParam(filter, 0, 100)).getModelList();
+
+        Assert.assertNotNull(modelList);
+    }
+
+    @Test
+    public void testQueryModelWithTemporal() {
+        ModelFileFilter filter = modelFileQueryService.listFilter();
+        ModelFileFilter single = getSingleFilter(filter);
+        PagedList<Model> modelList = modelFileQueryService.queryModel(new ModelQueryParam(single, 0, 10)).getModelList();
 
         Assert.assertEquals(modelList.getList().size(), 1);
 
-		Model model = modelFileQueryService.queryModelWithTemporal(modelList.getList().get(0));
-		Assert.assertNotNull(model);
-	}
-	
-	@Test
-	public void testQueryModelFile() {
+        Model model = modelFileQueryService.queryModelWithTemporal(modelList.getList().get(0));
+        Assert.assertNotNull(model);
+    }
+
+    @Test
+    public void testQueryModelFile() {
         ModelFileFilter filter = modelFileQueryService.listFilter();
         ModelFileFilter single = getSingleFilter(filter);
-        PagedList<Model> modelList =  modelFileQueryService.queryModel(new ModelQueryParam(single, 0, 10)).getModelList();
-		modelFileQueryService.queryModelFile(modelList.getList().get(0));
-	}
-	
-	@SuppressWarnings("unused")
-	@Test
-	public void testQueryRelatedNodes() {
+        PagedList<Model> modelList = modelFileQueryService.queryModel(new ModelQueryParam(single, 0, 10)).getModelList();
+        modelFileQueryService.queryModelFile(modelList.getList().get(0));
+    }
+
+    @SuppressWarnings("unused")
+    @Test
+    public void testQueryRelatedNodes() {
         Object result;
 
-		ModelFileFilter filter = modelFileQueryService.listFilter();
+        ModelFileFilter filter = modelFileQueryService.listFilter();
         PagedList<Model> model = modelFileQueryService.queryModel(new ModelQueryParam(filter, 0, 100)).getModelList();
         result = modelFileDao.queryRelatedNodes(model.getList());
 
-		ModelFileFilter single = getSingleFilter(filter);
+        ModelFileFilter single = getSingleFilter(filter);
         model = modelFileQueryService.queryModel(new ModelQueryParam(filter, 0, 100)).getModelList();
         result = modelFileDao.queryRelatedNodes(model.getList());
-	}
-	
-	@SuppressWarnings("unchecked")
-	private ModelFileFilter getSingleFilter(ModelFileFilter filter) {
-		List<ModelFileFields> fList = new ArrayList<ModelFileFields>();
-		ModelFileFilter single = null;
+    }
 
-		for (ModelFileFields f : ModelFileFields.values()) {
-			fList.add(f);
+    @SuppressWarnings("unchecked")
+    private ModelFileFilter getSingleFilter(ModelFileFilter filter) {
+        List<ModelFileFields> fList = new ArrayList<ModelFileFields>();
+        ModelFileFilter single = null;
 
-			single = new ModelFileFilter();
-			BeanWrapper singleWrapper = PropertyAccessorFactory.forBeanPropertyAccess(single);
-			for (ModelFileFields ff : fList) {
-				List<String> value = (List<String>) PropertyAccessorFactory.forBeanPropertyAccess(filter).getPropertyValue(ff.getField());
-				singleWrapper.setPropertyValue(ff.getField(), new ArrayList<String>(value.subList(0, 1)));
-			}
+        for (ModelFileFields f : ModelFileFields.values()) {
+            fList.add(f);
 
-			filter = ((ModelFileQueryServiceImpl)modelFileQueryService).doFilter(single);
-		}
+            single = new ModelFileFilter();
+            BeanWrapper singleWrapper = PropertyAccessorFactory.forBeanPropertyAccess(single);
+            for (ModelFileFields ff : fList) {
+                List<String> value = (List<String>) PropertyAccessorFactory.forBeanPropertyAccess(filter).getPropertyValue(ff.getField());
+                singleWrapper.setPropertyValue(ff.getField(), new ArrayList<String>(value.subList(0, 1)));
+            }
 
-		return filter;
-	}
+            filter = ((ModelFileQueryServiceImpl) modelFileQueryService).doFilter(single);
+        }
 
+        return filter;
+    }
 
 
 }
